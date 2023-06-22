@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { Image, Text, TextInput, TouchableOpacity, View, Alert } from "react-native";
+import { TouchableOpacity, Alert } from "react-native";
 import { MainView,
   Texto,
   Input,
@@ -10,15 +10,26 @@ import { MainView,
   Butao,
   TextLogarrb
    } from "./styles";
-import { FontAwesome5, Ionicons, Zocial } from '@expo/vector-icons'; 
+import { FontAwesome5, Zocial, Entypo } from '@expo/vector-icons'; 
 import React, { useState } from 'react';
 
 export const Login = () => {
 
+  const [iconNome, setIconNome] = useState('eye-with-line');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const changeIcon = () => {
+    if (iconNome === 'eye-with-line') {
+      setIconNome('eye');
+      togglePasswordVisibility();
+    } else {
+      setIconNome('eye-with-line');
+      togglePasswordVisibility();
+    }
+  };
 
 
   const handleLogin = () => {
@@ -49,8 +60,8 @@ export const Login = () => {
         <Viewtv>
           <Input value={password} onChangeText={setPassword} secureTextEntry={!passwordVisible} placeholder="Senha" placeholderTextColor={'#705A54'}/>
           <FontAwesome5 color='#704032'position='absolute' top={24} left={25} name="lock" size={24} />
-          <TouchableOpacity onPress={togglePasswordVisibility}>
-            <Ionicons color='#704032' position='absolute' bottom={26} right={25} name="eye" size={24} />
+          <TouchableOpacity onPress={changeIcon}>
+            <Entypo color='#704032' position='absolute' bottom={26} right={25} name={iconNome} size={24} />
           </TouchableOpacity>
         </Viewtv>
 

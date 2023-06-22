@@ -1,0 +1,24 @@
+import React from 'react'
+import { Preco, PageProduto, ContainerProduto, ImageProd, NomeProd, Estoque, Linha, Descricao, ContainerComprar, Botao, TextoBotao } from './styles'
+import { Ionicons } from '@expo/vector-icons';
+
+const PaginaProduto = () => {
+  return (
+      <PageProduto>
+        <ContainerProduto>
+        <Ionicons name="arrow-back" size={50} color="#705A54" style={{alignSelf: 'flex-start', position: 'absolute', margin: 10}}/>
+          <NomeProd>Café Pilão</NomeProd>
+          <ImageProd source={require('../../assets/images/pilao.png')} resizeMode='contain'/>
+          <Preco>{'R$50,00'}</Preco>
+          <Estoque>Estoque: {'3'}</Estoque>
+          <Linha />
+          <Descricao>Uma das marcas mais populares de café do brasil, com sabor tradicional e um preço que cabe no seu bolso.</Descricao>
+        </ContainerProduto>
+        <ContainerComprar>
+          <Botao><TextoBotao>Comprar</TextoBotao></Botao>
+        </ContainerComprar>
+      </PageProduto>
+    )
+}
+
+export default PaginaProduto

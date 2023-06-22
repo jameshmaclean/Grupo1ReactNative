@@ -1,15 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import styles from './src/screens/Registro'
-import Registro from './src/screens/Registro'
-import Categoria from './src/screens/Categoria'
+import Carrinho from './src/screens/Carrinho';
 
 export default function App() {
   return (
-    
-    //  <Registro/>
-     <Categoria/>
-    
+    // <View style={styles.container}>
+    <View>
+      <Carrinho/>
+      <StatusBar style="auto" />
+    </View>
   );
 }
 

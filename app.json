@@ -11,6 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "androidNavigationBar": {
+      "visible": "immersive"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],

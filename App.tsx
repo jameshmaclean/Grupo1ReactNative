@@ -8,6 +8,10 @@ import Registro from "./src/screens/Registro";
 import { Login } from "./src/screens/login";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import Menu from './src/screens/Menu'
+import PaginaProduto from "./src/screens/PaginaProduto";
+import Header from './src/components/Header';
+
 
 const Drawer = createDrawerNavigator();
 function MyStack() {
@@ -18,22 +22,26 @@ function MyStack() {
         drawerStyle: { backgroundColor: "cyan", height: "100%" },
       }}
     >
+      <Drawer.Screen name="Menu" component={Menu} />
       <Drawer.Screen
         options={{ drawerActiveBackgroundColor: "#E5C4D4" }}
-        name="Home"
+        name="Pesquisa"
         component={Produtos}
       />
       <Drawer.Screen name="Perfil" component={Profile} />
+      <Drawer.Screen name="Produto" component={PaginaProduto} />
       <Drawer.Screen name="Login" component={Login} />
       <Drawer.Screen name="Registro" component={Registro} />
       <Drawer.Screen name="Carrinho" component={Carrinho} />
     </Drawer.Navigator>
   );
 }
+
 export default function App() {
   return (
     <View style={{ flex: 1 }}>
       <NavigationContainer>
+        <Header />
         <MyStack />
       </NavigationContainer>
 
@@ -43,7 +51,7 @@ export default function App() {
       {/* <Login/> */}
       {/* <PaginaProduto/> */}
 
-      <StatusBar style="auto" />
+      <StatusBar style="auto"/>
     </View>
   );
 }

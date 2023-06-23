@@ -4,7 +4,7 @@ export const MainContainer = styled.View`
   height: 100%;
   width: 100%;
   align-items: center;
-  padding-top: 20%;
+  padding-top: 30px;
   background-color: #EDEDED;
 `
 export const SearchBox = styled.View`
@@ -14,6 +14,7 @@ export const SearchBox = styled.View`
   align-items: center;
   padding-left: 20px;
   border-radius: 50px;
+  margin-bottom: 20px;
   background-color: #FFFFFF;
 `
 
@@ -26,10 +27,9 @@ export const InputSearch = styled.TextInput`
 `
 export const CarrosselContainer = styled.View`
   margin-top: 7%;
-  flex-direction: row;
-  align-self: center;
-  gap: 20px;
   width: 100%;
+  background-color: #000;
+  align-items: flex-start;
 `
 
 export const CarrouselImg = styled.Image`

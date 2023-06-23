@@ -4,7 +4,7 @@ export const PageProduto = styled.View`
     flex: 1;
     align-items: center;
     background-color: #EDEDED;
-    padding-top: 100px;
+    padding-top: 15px;
 `
 
 export const ContainerProduto = styled.View`

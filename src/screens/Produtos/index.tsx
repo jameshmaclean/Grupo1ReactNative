@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import {
   Container,
-  Header,
   HeaderText,
   ButtonMenu,
   ButtonBasket,
@@ -32,6 +31,7 @@ import {
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import aaa from "../../assets/data/aaa";
+
 
 type Types = {
   value: string;
@@ -95,16 +95,6 @@ const Produtos = ({navigation}) => {
 
   return (
     <>
-      <Header>
-        <ButtonMenu>
-          <Entypo onPress={()=> navigation.openDrawer()} name="menu" size={40} color="#705A54" />
-        </ButtonMenu>
-        <HeaderText>TSpresso</HeaderText>
-        <ButtonBasket>
-          <Entypo name="shopping-basket" size={35} color="#705A54" onPress={() => navigation.navigate('Carrinho')}/>
-        </ButtonBasket>
-      </Header>
-
       <Container>
         <Input
           value=""

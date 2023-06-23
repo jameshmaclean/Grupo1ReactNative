@@ -1,7 +1,8 @@
 import styled from "styled-components/native";
+import global from "../../themes/global";
 
 export const Container = styled.View`
-  background-color: #ededed;
+  background-color: ${global.corPrimaria};
   align-items: center;
   height: 100%;
   width: 100%;
@@ -49,9 +50,9 @@ export const EditButtonText = styled.Text`
 `;
 
 export const ProfileTitle = styled.Text`
-    color : #705a54;
-    font-size: 20px;
-    font-weight: 800;
-    text-align: left;
-    margin-bottom: 3px;
-`
+  color: #705a54;
+  font-size: 20px;
+  font-weight: 800;
+  text-align: left;
+  margin-bottom: 3px;
+`;

@@ -23,7 +23,7 @@ import {
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
-const Carrinho = () => {
+const Carrinho = ({ navigation }) => {
   const handleDiminuir = (id: number) => {
     setProdutos((prevProdutos) => {
       return prevProdutos.map((produto) => {

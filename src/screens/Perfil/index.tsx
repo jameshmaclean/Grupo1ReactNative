@@ -13,7 +13,7 @@ import { UserContext } from "../../contexts/userContext";
 
 const Profile = () => {
   const [edit, setEdit] = useState(false);
- const {user} = useContext(UserContext)
+ const {user, setUser} = useContext(UserContext)
 
   const handleEdit = () => {
     setEdit(!edit);
@@ -52,7 +52,7 @@ const Profile = () => {
             <TextProfileEditing defaultValue={user.nome} onChangeText={(value) => handleChange("nome", value)}/>
             <TextProfileEditing defaultValue={user.email} onChangeText={(value) => handleChange("email", value)}/>
             <TextProfileEditing defaultValue={user.userName} onChangeText={(value) => handleChange("username", value)}/>
-            <TextProfileEditing defaultValue={user.cpf} onChangeText={(value) => handleChange("cpf", value)}/>
+            <TextProfileEditing defaultValue={user.cpf} editable={false} onChangeText={(value) => handleChange("cpf", value)}/>
             <TextProfileEditing defaultValue={user.cep} onChangeText={(value) => handleChange("cep", value)}/>
             <TextProfileEditing defaultValue={user.uf} onChangeText={(value) => handleChange("uf", value)}/>
             <TextProfileEditing defaultValue={user.cidade} onChangeText={(value) => handleChange("cidade", value)}/>

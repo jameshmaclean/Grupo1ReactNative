@@ -1,14 +1,25 @@
-import { SafeAreaView, TextInput, View, Dimensions, Text, Image } from "react-native";
+import {  View, Dimensions } from "react-native";
 import { CarrosselContainer, CarrouselImg, InputSearch, MainContainer, SearchBox } from "./style";
 import { AntDesign } from '@expo/vector-icons'; 
-import { useState, useRef } from "react";
+import {  useRef } from "react";
 import Carousel from 'react-native-snap-carousel';
 
-const imgs = ['../../assets/images/promo1.webp','../../assets/images/promo2.jpg','../../assets/images/promo3.jpg']
-
+const imgs = [
+  require('../../assets/images/promo1.webp'),
+  require('../../assets/images/promo2.jpg'),
+  require('../../assets/images/promo3.jpg')
+];
 const Menu = () => {
-  const width = Dimensions.get('window').width
+  const width:number = Dimensions.get('window').width
   const isCarousel = useRef(null)
+
+  const imagensCarrossel= ({ item })=>{
+    return(
+      <View style={{alignSelf:"center"}}>
+      <CarrouselImg source={item}resizeMode="cover" />
+    </View>
+    )
+  }
 
   return (
       <MainContainer >
@@ -20,15 +31,16 @@ const Menu = () => {
         <CarrosselContainer>
           
         <Carousel
-        layout="stack"
-        layoutCardOffset={9}
+        autoplay
+        layoutCardOffset={50}
+        autoplayInterval={3000} // Defina o intervalo de tempo entre os slides em milissegundos
+        vertical={false}
+        layout="default"
         ref={isCarousel}
         data={imgs}
-        renderItem={(item)=> <CarrouselImg source={require('../../assets/images/promo2.jpg')} />}
+        renderItem={imagensCarrossel}
         sliderWidth={width}
         itemWidth={100}
-        inactiveSlideShift={1}
-        useScrollView={true}
       />
 
           {/* <Carousel layout={'default'} layoutCardOffset={9} sliderWidth={width} itemWidth={100} data={imgs} renderItem={({item, index})=> <CarrouselImg source={require('../../assets/images/promo3.jpg')}/> } onSnapToItem={(item) => console.log('Item:', item)} scrollEnabled={true}/> */}

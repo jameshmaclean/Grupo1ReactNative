@@ -53,13 +53,13 @@ function MyStack() {
       />
       <Drawer.Screen name="Perfil" component={Profile} />
       <Drawer.Screen name="Produto" component={PaginaProduto} />
-      <Drawer.Screen
-        options={{ headerShown: false, swipeEnabled: true }}
-        name="Login"
-        component={Login}
-      />
       <Drawer.Screen name="Registro" component={Registro} />
       <Drawer.Screen name="Carrinho" component={Carrinho} />
+      <Drawer.Screen
+        options={{ headerShown: false, swipeEnabled: true }}
+        name="Sair"
+        component={Login}
+      />
     </Drawer.Navigator>
   );
 }

@@ -12,6 +12,8 @@ import { MainView,
    } from "./styles";
 import { FontAwesome5, Zocial, Entypo } from '@expo/vector-icons'; 
 import React, { useState } from 'react';
+import { useNavigation } from "@react-navigation/native";
+
 
 export const Login = () => {
 
@@ -20,6 +22,7 @@ export const Login = () => {
   const [password, setPassword] = useState('');
 
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const navigation = useNavigation();
 
   const changeIcon = () => {
     if (iconNome === 'eye-with-line') {
@@ -30,14 +33,17 @@ export const Login = () => {
       togglePasswordVisibility();
     }
   };
-
-
+ 
   const handleLogin = () => {
-    if (email === 'danielreidelas@gmail.com' && password === '123') {
-      Alert.alert('Login bem-sucedido');
+    if (email === 'mclean@gmail.com' && password === 'clone') {
+      navigation.navigate('Menu');
     } else {
       Alert.alert('Credenciais inválidas');
     }
+  };
+
+  const handleRagistro = () => {
+    navigation.navigate('Registro');
   };
 
   const togglePasswordVisibility = () => {
@@ -69,7 +75,7 @@ export const Login = () => {
           <TextReg2>Esqueceu a senha?</TextReg2>
         </TouchableOpacity>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleRagistro}>
           <TextReg>Não possui conta? Registre-se!</TextReg>
         </TouchableOpacity>
 

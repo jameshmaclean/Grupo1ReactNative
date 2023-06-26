@@ -37,3 +37,13 @@ export const CarrouselImg = styled.Image`
   height: 200px;
   width: 200px;
 `;
+
+export const TextRecomendado = styled.Text`
+  margin-top: 30px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  align-self: flex-start;
+  font-size: 28px;
+  font-weight: 500;
+  color: #705A54;
+`

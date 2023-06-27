@@ -25,7 +25,7 @@ function RotasPublicas() {
             <DrawerContentScrollView {...props}>
               <ContainerFoto>
                 <ImagemDrawer source={{ uri: user?.url }} resizeMode="cover" />
-                <TextoDrawer>{user!.nome}</TextoDrawer>
+                <TextoDrawer>{user?.nome}</TextoDrawer>
               </ContainerFoto>
               <DrawerItemList {...props} />
             </DrawerContentScrollView>
@@ -54,7 +54,7 @@ function RotasPublicas() {
 
         <Drawer.Screen
           options={{ headerShown: false, swipeEnabled: true }}
-          name="Sair"
+          name="Entrar"
           component={Login}
         />
       </Drawer.Navigator>

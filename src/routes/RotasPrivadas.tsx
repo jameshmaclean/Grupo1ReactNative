@@ -5,7 +5,7 @@ import Profile from "../screens/Perfil";
 import Produtos from "../screens/Produtos";
 import Registro from "../screens/Registro";
 import Login from "../screens/login";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { DrawerItem, createDrawerNavigator } from "@react-navigation/drawer";
 import Menu from "../screens//Menu";
 import PaginaProduto from "../screens/PaginaProduto";
 import { UserContext } from "../contexts/userContext";
@@ -14,10 +14,11 @@ import RotasPublicas from "./RotasPublicas";
 import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
 import { ContainerFoto, ImagemDrawer, TextoDrawer } from "./styles";
 import Header from "../components/Header";
+import { useAuth } from "../contexts/authContext";
 const Drawer = createDrawerNavigator();
 
 function RotasPrivadas() {
-  const { user } = useContext(UserContext)!;
+  const { logout, user } = useAuth();
   return (
     <NavigationContainer>
       <Drawer.Navigator
@@ -25,10 +26,11 @@ function RotasPrivadas() {
           return (
             <DrawerContentScrollView {...props}>
               <ContainerFoto>
-                <ImagemDrawer source={{ uri: user?.url }} resizeMode="cover" />
-                <TextoDrawer>{user!.nome}</TextoDrawer>
+                <ImagemDrawer source={{ uri: user.url }} resizeMode="cover" />
+                <TextoDrawer>{user.nome}</TextoDrawer>
               </ContainerFoto>
               <DrawerItemList {...props} />
+              <DrawerItem label={'Sair'} onPress={()=> logout()}/>
             </DrawerContentScrollView>
           );
         }}
@@ -54,11 +56,6 @@ function RotasPrivadas() {
         <Drawer.Screen name="Produto" component={PaginaProduto} />
         <Drawer.Screen name="Registro" component={Registro} />
         <Drawer.Screen name="Carrinho" component={Carrinho} />
-        <Drawer.Screen
-          options={{ headerShown: false, swipeEnabled: true }}
-          name="Sair"
-          component={Login}
-        />
       </Drawer.Navigator>
     </NavigationContainer>
   );

@@ -1,3 +1,4 @@
+import { IUser } from '../Model/User'
 import { api } from './api'
 
 type userType= {
@@ -81,8 +82,8 @@ type userType= {
 }
 
  export const UserById = async (id : number) => {
-     const produto = await api.get("usuario/lista/"+id)
-     return produto;
+     const usuario = await api.get("usuario/lista/"+id)
+     return usuario;
  }
  
  export const UserPic = async (id : number) => {

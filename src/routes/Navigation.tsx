@@ -1,15 +1,12 @@
 import React from "react";
 import Rotas from ".";
-import { UserContextProvider } from "../contexts/userContext";
-import  AuthProvider  from "../contexts/authContext";
+import AuthProvider from "../contexts/authContext";
 
 const Navigation = () => {
   return (
-    <AuthProvider>
-      <UserContextProvider>
+      <AuthProvider>
         <Rotas />
-      </UserContextProvider>
-    </AuthProvider>
+      </AuthProvider>
   );
 };
 

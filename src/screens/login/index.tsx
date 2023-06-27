@@ -12,11 +12,12 @@ import {
   TextLogarrb,
 } from "./styles";
 import { FontAwesome5, Zocial, Entypo } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../contexts/authContext";
 import { useForm, FieldValues } from "react-hook-form";
 import { InputControl } from "../../components/InputControl";
+import { UserContext } from "../../contexts/userContext";
 
 interface ScreenNavigationProp {
   navigate: (screen: string) => void;
@@ -54,10 +55,10 @@ const Login = () => {
       password: form.password,
     };
     try {
-      console.log("Dados chegando:", data)
       setLoading(true);
       login(data);
       navigate("Menu")
+      setLoading(false);
     } catch (error) {
       Alert.alert("Erro na autenticação form");
     }

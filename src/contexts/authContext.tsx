@@ -44,8 +44,8 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
   }, []);
   const login = async ({ username, password }: ICredentials) => {
     try {
-      const response = await api.post("/auth/signin", { username, password });
-      console.log(response.data);
+      const response = await api.post('/auth/signin', { username, password });
+      console.log("dados", response.data);
       const { accessToken, id } = response.data;
       await AsyncStorage.setItem(tokenData, accessToken);
       await AsyncStorage.setItem(userData, JSON.stringify(id));

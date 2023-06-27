@@ -14,9 +14,7 @@ export default function App() {
     <View style={{ flex: 1 }}>
       {loaded === true ? (
         <View style={{ flex: 1 }}>
-          <NavigationContainer>
             <Navigation />
-          </NavigationContainer>
           <StatusBar style="auto" />
         </View>
       ) : (

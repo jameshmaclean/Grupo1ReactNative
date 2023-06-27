@@ -7,6 +7,6 @@ export const Container = styled.View`
   font-size: 20px;
   background-color: #ffffff;
   margin: 20px;
-  padding-left: 40px;
   border-radius: 5px;
 `;
+

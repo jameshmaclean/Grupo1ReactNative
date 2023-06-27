@@ -75,11 +75,11 @@ const Login = () => {
     <>
       <MainView>
         <Imag source={require("../../assets/images/logo.png")} />
-        <Texto>Bem-vinde de volta!</Texto>
+        <Texto>Bem-vindo(a) de volta!</Texto>
 
         <Viewtv>
           <InputControl
-            placeholder="E-mail:"
+            placeholder="E-mail"
             name="username"
             control={control}
           />
@@ -100,7 +100,7 @@ const Login = () => {
         </Viewtv>
 
         <Viewtv>
-          <InputControl name="password" control={control} secureTextEntry />
+          <InputControl placeholder="Senha" name="password" control={control} secureTextEntry={!passwordVisible} />
           {/* value={password}
             onChangeText={setPassword}
             secureTextEntry={!passwordVisible}
@@ -128,11 +128,7 @@ const Login = () => {
         </Viewtv>
 
         <TouchableOpacity>
-          <TextReg2>Esqueceu a senha?</TextReg2>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={handleRagistro}>
-          <TextReg>Não possui conta? Registre-se!</TextReg>
+          <TextReg onPress={handleRagistro}>Não possui conta? Registre-se!</TextReg>
         </TouchableOpacity>
 
         <Butao onPress={handleSubmit(handleLogin)} disabled={loading}>

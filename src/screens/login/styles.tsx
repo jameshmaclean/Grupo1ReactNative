@@ -28,8 +28,6 @@ export const Viewtv = styled.View`
 `;
 export const TextReg = styled.Text`
   color: #705a54;
-  margin-top: 20px;
-  margin-bottom: 50px;
   font-size: 15px;
 `;
 export const TextReg2 = styled.Text`
@@ -43,13 +41,13 @@ export const Imag = styled.Image`
   height: 150px;
 `;
 export const Butao = styled.TouchableOpacity`
-  flex: 0.15;
   justify-content: center;
   align-items: center;
   height: 50px;
   width: 200px;
   background-color: #705a54;
   border-radius: 10px;
+  margin-top: 40px;
 `;
 export const TextLogarrb = styled.Text`
   font-size: 20px;

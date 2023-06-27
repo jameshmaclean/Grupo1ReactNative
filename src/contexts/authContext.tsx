@@ -3,7 +3,6 @@ import { api } from "../services/api";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { IUser } from "../Model/User";
-import { UserContext } from "./userContext";
 import { UserById } from "../services/usuario";
 
 interface IAuthState {
@@ -21,6 +20,7 @@ interface IAuthContext {
   login(credential: ICredentials): void;
   logout(): void;
   user:IUserData;
+  setUser(user:any):any
 }
 
 interface IProps {
@@ -86,7 +86,7 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
     setUser(response.data);
   }
   return (
-    <AuthContext.Provider value={{ user, id: data.id, login, logout }}>
+    <AuthContext.Provider value={{ setUser, user, id: data.id, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

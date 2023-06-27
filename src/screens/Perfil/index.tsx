@@ -9,19 +9,19 @@ import {
   EditButtonText,
   ProfileTitle,
 } from "./styles";
-import { UserContext } from "../../contexts/userContext";
+import { useAuth } from "../../contexts/authContext";
 
 const Profile = () => {
   const [edit, setEdit] = useState(false);
- const {user, setUser} = useContext(UserContext)
+  const { user, setUser } = useAuth();
 
   const handleEdit = () => {
     setEdit(!edit);
   };
 
-  const handleChange=(campo:string, valor:string)=> {
-    setUser((userAntigo) => ({ ...userAntigo, [campo]: valor }));
-  }
+  const handleChange = (campo: string, valor: string) => {
+    setUser((userAntigo: any) => ({ ...userAntigo, [campo]: valor }));
+  };
 
   return (
     <Container>
@@ -49,14 +49,39 @@ const Profile = () => {
           </>
         ) : (
           <>
-            <TextProfileEditing defaultValue={user.nome} onChangeText={(value) => handleChange("nome", value)}/>
-            <TextProfileEditing defaultValue={user.email} onChangeText={(value) => handleChange("email", value)}/>
-            <TextProfileEditing defaultValue={user.userName} onChangeText={(value) => handleChange("username", value)}/>
-            <TextProfileEditing defaultValue={user.cpf} editable={false} onChangeText={(value) => handleChange("cpf", value)}/>
-            <TextProfileEditing defaultValue={user.cep} onChangeText={(value) => handleChange("cep", value)}/>
-            <TextProfileEditing defaultValue={user.uf} onChangeText={(value) => handleChange("uf", value)}/>
-            <TextProfileEditing defaultValue={user.cidade} onChangeText={(value) => handleChange("cidade", value)}/>
-            <TextProfileEditing defaultValue={user.complemento} onChangeText={(value) => handleChange("complemento", value)}/>
+            <TextProfileEditing
+              defaultValue={user.nome}
+              onChangeText={(value) => handleChange("nome", value)}
+            />
+            <TextProfileEditing
+              defaultValue={user.email}
+              onChangeText={(value) => handleChange("email", value)}
+            />
+            <TextProfileEditing
+              defaultValue={user.userName}
+              onChangeText={(value) => handleChange("username", value)}
+            />
+            <TextProfileEditing
+              defaultValue={user.cpf}
+              editable={false}
+              onChangeText={(value) => handleChange("cpf", value)}
+            />
+            <TextProfileEditing
+              defaultValue={user.cep}
+              onChangeText={(value) => handleChange("cep", value)}
+            />
+            <TextProfileEditing
+              defaultValue={user.uf}
+              onChangeText={(value) => handleChange("uf", value)}
+            />
+            <TextProfileEditing
+              defaultValue={user.cidade}
+              onChangeText={(value) => handleChange("cidade", value)}
+            />
+            <TextProfileEditing
+              defaultValue={user.complemento}
+              onChangeText={(value) => handleChange("complemento", value)}
+            />
           </>
         )}
       </ScrollView>

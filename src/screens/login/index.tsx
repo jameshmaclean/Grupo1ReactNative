@@ -17,7 +17,6 @@ import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../contexts/authContext";
 import { useForm, FieldValues } from "react-hook-form";
 import { InputControl } from "../../components/InputControl";
-import { UserContext } from "../../contexts/userContext";
 
 interface ScreenNavigationProp {
   navigate: (screen: string) => void;

@@ -8,7 +8,6 @@ import Login from "../screens/login";
 import { DrawerItem, createDrawerNavigator } from "@react-navigation/drawer";
 import Menu from "../screens//Menu";
 import PaginaProduto from "../screens/PaginaProduto";
-import { UserContext } from "../contexts/userContext";
 import { NavigationContainer } from "@react-navigation/native";
 import RotasPublicas from "./RotasPublicas";
 import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";

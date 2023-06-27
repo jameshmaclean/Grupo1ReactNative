@@ -9,7 +9,6 @@ import Header from "../components/Header";
 import { ContainerFoto, ImagemDrawer, TextoDrawer } from "./styles";
 import { useAuth } from "../contexts/authContext";
 import { NavigationContainer } from "@react-navigation/native";
-import { UserContext } from "../contexts/userContext";
 import RotasPrivadas from "./RotasPrivadas";
 import RotasPublicas from "./RotasPublicas";
 const Drawer = createDrawerNavigator();

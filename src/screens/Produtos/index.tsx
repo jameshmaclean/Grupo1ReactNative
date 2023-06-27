@@ -28,8 +28,9 @@ import {
   Filter,
   FilterText,
 } from "./styles";
+import{SearchBox, InputSearch} from '../Menu/style'
 import { Entypo } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, AntDesign } from "@expo/vector-icons";
 import aaa from "../../assets/data/aaa";
 
 
@@ -40,35 +41,6 @@ type Types = {
   overlay?: (value: boolean) => void;
 };
 
-const Input = (props: Types, {navigation}) => {
-  const [modalVisivel, setModalVisivel] = useState(false);
-
-  function setVisibility(valueVisible: boolean) {
-    setModalVisivel(valueVisible);
-  }
-
-  return (
-    <InputButton activeOpacity={1} onPress={() => setVisibility(true)}>
-      {props.value === "" ? (
-        <PlaceholderText>{props.value || props.placeholder}</PlaceholderText>
-      ) : (
-        <WrittenText>{props.value || props.placeholder}</WrittenText>
-      )}
-      <Modal
-        visible={modalVisivel}
-        onRequestClose={() => setVisibility(false)}
-        animationType="slide"
-        transparent
-      >
-        <TouchableOpacity />
-
-        <ViewInput>
-          <UserInput {...props} />
-        </ViewInput>
-      </Modal>
-    </InputButton>
-  );
-};
 
 type ItemProps = {
   name: string;
@@ -93,14 +65,28 @@ const Produtos = ({navigation}) => {
   const [busca, setBusca] = useState("");
   const [overlay, setOverlay] = useState(false);
 
+  const [resultadosBusca, setResultadosBusca] = useState([]);
+
+  const buscarProdutos = (termoBusca: string) => {
+    const resultados = aaa.filter((item) =>
+      item.title.toLowerCase().includes(termoBusca.toLowerCase())
+    );
+    setResultadosBusca(resultados);
+  };
+
   return (
     <>
       <Container>
-        <Input
-          value=""
-          placeholder="Barra de pesquisa teehee"
-          onChangeText={setBusca}
-        />
+        <SearchBox>
+          <AntDesign name="search1" size={24} color="#705A54"/>
+          {/* <SearchBar placeholder="Busca" */}
+          <TextInput
+            placeholder="Busca"
+            blurOnSubmit={true}
+            onChangeText={buscarProdutos}
+          />
+          {/* <InputSearch placeholder="Busca" blurOnSubmit={true}/> */}
+        </SearchBox>
 
         <Filter>
           <FilterText>
@@ -111,7 +97,7 @@ const Produtos = ({navigation}) => {
 
         {/* <ContainerProdutos> */}
         <FlatList
-          data={aaa}
+          data={resultadosBusca.length > 0 ? resultadosBusca : aaa}
           renderItem={({ item }) => (
             <Item name={item.title} image={item.image} price={item.price} />
           )}

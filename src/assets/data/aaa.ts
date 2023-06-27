@@ -8,14 +8,14 @@ export default [
 
 {
     id: "2",
-    title: "Produto",
+    title: "nescau",
     price: "00,00",
     image: "https://i.pinimg.com/564x/96/e0/d5/96e0d5bc47c2c087a3c261058d82095b.jpg"
 },
 
 {
     id: "3",
-    title: "Produto",
+    title: "cafe",
     price: "00,00",
     image: "https://i.pinimg.com/564x/37/a2/71/37a2719d489d8f3c55acea2a3be9a19a.jpg"
 },

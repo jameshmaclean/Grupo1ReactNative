@@ -20,6 +20,7 @@ export const Login = () => {
   const [iconNome, setIconNome] = useState('eye-with-line');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false)
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigation = useNavigation();
@@ -79,7 +80,7 @@ export const Login = () => {
           <TextReg>Não possui conta? Registre-se!</TextReg>
         </TouchableOpacity>
 
-        <Butao onPress={handleLogin}>
+        <Butao onPress={handleLogin} disabled={loading}>
           <TextLogarrb>Entrar</TextLogarrb>
         </Butao>
 

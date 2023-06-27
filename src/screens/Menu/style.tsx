@@ -26,6 +26,7 @@ export const InputSearch = styled.TextInput`
   justify-content: center;
   background-color: #ffffff;
 `;
+
 export const CarrosselContainer = styled.View`
   margin-top: 7%;
   width: 100%;

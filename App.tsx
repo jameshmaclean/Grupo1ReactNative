@@ -20,6 +20,8 @@ import Header from "./src/components/Header";
 import { ContainerFoto, ImagemDrawer, TextoDrawer } from "./styles";
 import { UserContext, UserContextProvider } from "./src/contexts/userContext";
 import AnimatedLottieView from "lottie-react-native";
+import TestRequi from "./src/screens/TestRequi"
+
 const Drawer = createDrawerNavigator();
 
 function MyStack() {
@@ -60,6 +62,7 @@ function MyStack() {
         name="Sair"
         component={Login}
       />
+      <Drawer.Screen name="Requisições" component={TestRequi} />
     </Drawer.Navigator>
   );
 }

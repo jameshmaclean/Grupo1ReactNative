@@ -3,6 +3,22 @@ import { ScrollView, View } from 'react-native';
 import {Container, Title, FormGroup, Input, ButtonText, Button1} from './styles'
 
 const Registro = () => {
+
+  type userType= {  
+    email : string
+    nome : string
+    nomeUser : string
+    telefone : string
+    cpf : string
+    compra : boolean
+    venda : boolean
+    data : string
+    cep : string
+    numero : string
+    complemento : string
+    password : string
+}
+
   return (
     <ScrollView>
       <Container>

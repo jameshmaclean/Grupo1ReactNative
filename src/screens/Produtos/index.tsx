@@ -32,6 +32,7 @@ import{SearchBox, InputSearch} from '../Menu/style'
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
 import aaa from "../../assets/data/aaa";
+import { listProduct } from "../../services/produto";
 
 
 type Types = {
@@ -62,20 +63,26 @@ const Item = ({ name, image, price }: ItemProps) => (
 );
 
 const Produtos = ({ route , navigation} : {route : any, navigation : any}) => {
-  const { menuBusca } = route.params
+  const { menuBusca } = route.params || ""
   const [busca, setBusca] = useState("");
   const [overlay, setOverlay] = useState(false);
 
   const [resultadosBusca, setResultadosBusca] = useState([]);
 
-  useEffect(() => {buscarProdutos(menuBusca)},[])
+  useEffect(() => {listaAPI(), buscarProdutos(menuBusca || "")},[])
 
   const buscarProdutos = (termoBusca : string) => {
-    const resultados = aaa.filter((item) =>
-      item.title.toLowerCase().includes(termoBusca.toLowerCase())
+    const resultados = resultadosBusca.filter((item) =>
+      item.nome.toLowerCase().includes(termoBusca.toLowerCase())
     );
     setResultadosBusca(resultados);
   };
+
+  const listaAPI = async () => {
+    const { data } : { data : any} = await listProduct();
+    console.log("nossa lista: ",resultadosBusca)
+    setResultadosBusca(data)
+  }
 
   return (
     <>
@@ -102,9 +109,9 @@ const Produtos = ({ route , navigation} : {route : any, navigation : any}) => {
 
         {/* <ContainerProdutos> */}
         <FlatList
-          data={resultadosBusca.length > 0 ? resultadosBusca : aaa}
+          data={resultadosBusca.length > 0 ? resultadosBusca : []}
           renderItem={({ item }) => (
-            <Item name={item.title} image={item.image} price={item.price} />
+            <Item name={item.nome} image={item.url} price={item.valorUnitario} />
           )}
           keyExtractor={(item) => item.id}
           numColumns={2}

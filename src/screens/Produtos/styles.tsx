@@ -110,6 +110,7 @@ export const FilterText = styled.Text`
 export const ProdutoCard = styled.View`
     background-color: white;
     width: 46%;
+    min-width: 180px;
     height:250px;
     border-radius: 10px;
     margin-bottom: 10px;

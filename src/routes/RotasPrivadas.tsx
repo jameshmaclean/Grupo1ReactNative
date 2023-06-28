@@ -29,7 +29,7 @@ function RotasPrivadas() {
                 <TextoDrawer>{user.nome}</TextoDrawer>
               </ContainerFoto>
               <DrawerItemList {...props} />
-              <DrawerItem label={'Sair'} onPress={()=> logout()}/>
+              <DrawerItem label={'Sair'} onPress={()=> logout()} labelStyle={{fontWeight: "800", fontSize: 20, color: "#705A54",}}/>
             </DrawerContentScrollView>
           );
         }}

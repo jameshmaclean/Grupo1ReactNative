@@ -61,13 +61,16 @@ const Item = ({ name, image, price }: ItemProps) => (
   </ProdutoCard>
 );
 
-const Produtos = ({navigation}) => {
+const Produtos = ({ route , navigation} : {route : any, navigation : any}) => {
+  const { menuBusca } = route.params
   const [busca, setBusca] = useState("");
   const [overlay, setOverlay] = useState(false);
 
   const [resultadosBusca, setResultadosBusca] = useState([]);
 
-  const buscarProdutos = (termoBusca: string) => {
+  useEffect(() => {buscarProdutos(menuBusca)},[])
+
+  const buscarProdutos = (termoBusca : string) => {
     const resultados = aaa.filter((item) =>
       item.title.toLowerCase().includes(termoBusca.toLowerCase())
     );
@@ -77,13 +80,15 @@ const Produtos = ({navigation}) => {
   return (
     <>
       <Container>
-        <SearchBox>
+        <SearchBox style={{marginTop: 30}}>
           <AntDesign name="search1" size={24} color="#705A54"/>
           {/* <SearchBar placeholder="Busca" */}
           <TextInput
+            style={{marginLeft: 10, width: '90%'}}
             placeholder="Busca"
             blurOnSubmit={true}
             onChangeText={buscarProdutos}
+            defaultValue={menuBusca}
           />
           {/* <InputSearch placeholder="Busca" blurOnSubmit={true}/> */}
         </SearchBox>

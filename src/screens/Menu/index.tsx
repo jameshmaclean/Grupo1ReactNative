@@ -1,4 +1,4 @@
-import {  View, Dimensions } from "react-native";
+import {  View, Dimensions, ScrollView } from "react-native";
 import { CarrosselContainer, CarrouselImg, InputSearch, MainContainer, SearchBox, TextRecomendado } from "./style";
 import { AntDesign, Entypo } from '@expo/vector-icons'; 
 import { useRef } from "react";
@@ -39,7 +39,7 @@ const Item = ({ name, image, price }: ItemProps) => (
   </ProdutoCard>
 );
 
-const Menu = () => {
+const Menu = ({navigation} : {navigation : any}) => {
   const width:number = Dimensions.get('window').width
   const isCarousel = useRef(null)
 
@@ -52,11 +52,12 @@ const Menu = () => {
   }
 
   return (
+    <ScrollView>
       <MainContainer >
         <SearchBox>
           <AntDesign name="search1" size={24} color="#705A54"/>
           {/* <SearchBar placeholder="Busca" */}
-          <InputSearch placeholder="Busca" blurOnSubmit={true}/>
+          <InputSearch placeholder="Busca" blurOnSubmit={true} onSubmitEditing={(e) => navigation.navigate('Pesquisa', {menuBusca : e.nativeEvent.text})}/>
         </SearchBox>
         <CarrosselContainer>
           <Entypo name="chevron-thin-left" size={45} color="#705A54" onPress={() => isCarousel.current.snapToPrev()} style={{position: "absolute", left: '3%', zIndex: 2}}/>
@@ -93,9 +94,11 @@ const Menu = () => {
             paddingLeft: 15,
             paddingRight: 15,
           }}
+          scrollEnabled={false}
         />
 
       </MainContainer>
+      </ScrollView>
   );
 };
 

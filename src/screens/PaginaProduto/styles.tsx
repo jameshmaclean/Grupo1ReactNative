@@ -85,6 +85,6 @@ export const Botao = styled.TouchableOpacity`
 
 export const TextoBotao = styled.Text`
   font-size: 24px;
-  color: ${global.surface};
+  color: ${global.background};
   font-weight: 600;
 `

@@ -1,6 +1,7 @@
 import React from 'react'
 import { ScrollView, View } from 'react-native';
 import {Container, Title, FormGroup, Input, ButtonText, Button1} from './styles'
+import { Preechimento } from './styles';
 
 const Registro = () => {
 
@@ -74,7 +75,7 @@ const Registro = () => {
           <ButtonText>Registrar</ButtonText>
         </Button1>
       </Container>
-      <View style={{height: 40}}/>
+      <Preechimento />
     </ScrollView>
   )
 }

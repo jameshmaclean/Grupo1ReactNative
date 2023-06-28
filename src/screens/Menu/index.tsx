@@ -13,6 +13,8 @@ import {
   ProductInfo,
   TextInfo,
 } from "../Produtos/styles";
+import { change } from '../../themes/global';
+
 
 const imgs = [
   require('../../assets/images/promo1.webp'),
@@ -79,7 +81,7 @@ const Menu = ({navigation} : {navigation : any}) => {
       />
 
         </CarrosselContainer>
-        <TextRecomendado>Recomendações</TextRecomendado>
+        <TextRecomendado onPress={change}>Recomendações</TextRecomendado>
         <FlatList
           data={aaa}
           renderItem={({ item }) => (

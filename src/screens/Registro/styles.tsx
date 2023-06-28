@@ -52,3 +52,7 @@ export const ButtonText = styled.Text`
   font-weight: bold;
 `;
 
+export const Preechimento = styled.View`
+  height: 40px;
+  background-color: ${global.surface};
+`

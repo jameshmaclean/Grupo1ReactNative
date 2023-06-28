@@ -127,8 +127,10 @@ export const TextInfo = styled.Text`
 `;
 
 export const ButtonText = styled.Text`
-    color: ${global.surface};
+    color: ${global.background};
     font-size: 20px;
 `;
+
+
 
 

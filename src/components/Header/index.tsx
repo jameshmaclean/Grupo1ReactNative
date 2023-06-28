@@ -1,4 +1,4 @@
-import React from 'react-native'
+import React, { Button } from 'react-native'
 import {Body, ButtonMenu, HeaderText, ButtonBasket} from './styles'
 import { Entypo } from "@expo/vector-icons";
 

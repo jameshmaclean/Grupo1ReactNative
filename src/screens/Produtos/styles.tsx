@@ -68,7 +68,7 @@ export const PlaceholderText = styled.Text`
     color: ${global.placeholder};
     `; 
 
-export const WrittenText = styled(.PlaceholderText)`
+export const WrittenText = styled(PlaceholderText)`
     color: ${global.input};
     `;
 

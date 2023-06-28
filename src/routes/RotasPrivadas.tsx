@@ -18,6 +18,7 @@ const Drawer = createDrawerNavigator();
 
 function RotasPrivadas() {
   const { logout, user } = useAuth();
+  {console.log('USER ROTAS', user)}
   return (
     <NavigationContainer>
       <Drawer.Navigator

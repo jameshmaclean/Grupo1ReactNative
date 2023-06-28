@@ -53,9 +53,8 @@ const [user, setUser] = useState<userType>({
   url: ''
 });
 
-const [selectedImage, setSelectedImage] = useState(null);
 
-const formData = new FormData();
+
 
 const openImagePicker = async () => {
   const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -64,43 +63,26 @@ const openImagePicker = async () => {
     alert('A permissão para acessar a biblioteca de mídia é necessária!');
     return;
   }
-
   const pickerResult = await ImagePicker.launchImageLibraryAsync();
-
-  
-
   if (!pickerResult.canceled) {
-    
-    formData.append('foto', {
-      uri: pickerResult.assets[0].uri,
-      type: 'image/jpeg',
-      name: 'photo.jpg',
-    }) 
-    ;
-
     setFotoUser(pickerResult.assets[0].uri);
   }
 };
 
 const handleRegistro = async() => {
-  
+  const formData = new FormData();
   formData.append('usuarioDTO', JSON.stringify(user))
-  formData.append('foto', { uri: fotoUser, type: 'application/octet-stream' });
+  formData.append('foto', {
+    uri: fotoUser, // URI da imagem selecionada
+    type: 'image/jpeg', // Tipo do arquivo de imagem
+    name: 'photo.jpg', // Nome do arquivo de imagem
+  });
   ;
   console.log("formdata:", formData)
 
   const response = await api.post(`usuario/inserir?email=${encodeURIComponent(user.email)}`, formData, {headers:{'Content-Type': 'multipart/form-data'}} )
     console.log("response",response)
     return response
-
-    // .then(response => {
-    //   console.log(response.data);
-      
-    // })
-    // .catch(error => {
-    //   console.error(error);
-      
-    // });
 };
 
   return (
@@ -167,7 +149,7 @@ const handleRegistro = async() => {
           <Input placeholderTextColor="#705A54" placeholder="Complemento" onChangeText={(text) => setUser({ ...user, complemento: text })}/>
         </FormGroup>
 
-        <Button1  onPress={handleRegistro} >
+        <Button1  onPress={()=> handleRegistro} >
           <ButtonText>Registrar</ButtonText>
         </Button1>
       </Container>

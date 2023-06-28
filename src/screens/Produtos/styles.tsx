@@ -1,7 +1,8 @@
 import styled from "styled-components/native";
+import global from "../../themes/global";
 
 export const Header = styled.View`
-    background-color: #D9D9D9;
+    background-color: ${global.surfaceVariant};
     height: 70px;
     width: 100%;
     flex-direction: row;
@@ -20,7 +21,7 @@ background-color: transparent;
 `;
 
 export const HeaderText = styled.Text`
-    color: #704032;
+    color: ${global.secondary};
     font-weight: bold;
     font-size: 32px;
 `;
@@ -30,11 +31,11 @@ export const Container = styled.View `
     width: 100%;
     justify-content: center;
     align-items: center;
-    background-color: #EDEDED;
+    background-color: ${global.surface};
 `;
 
 export const SearchBar = styled.TextInput`
-    background-color: #FFFFFF;
+    background-color: ${global.background};
     border-radius: 10px;
     width: 80%;
     height: 45px;
@@ -53,7 +54,7 @@ export const ContainerProdutos = styled.View`
 
 
 export const InputButton = styled.TouchableOpacity`
-    background-color: #FFFFFF;
+    background-color: ${global.background};
     border-radius: 10px;
     width: 80%;
     height: 45px;
@@ -64,28 +65,15 @@ export const InputButton = styled.TouchableOpacity`
     `;
 
 export const PlaceholderText = styled.Text`
-    color: gray;
+    color: ${global.placeholder};
     `; 
 
-export const WrittenText = styled(PlaceholderText)`
-    color: black;
-    `;
-
-export const UserInput = styled.TextInput`
-    color: blue;
-    border-width: 2px;
-    border-color: black;
-    `;
-
-export const ViewInput = styled.View`
-    background-color: red;
-    padding: 20px;
-    border-top-right-radius: 12px;
-    border-top-left-radius: 12px;
+export const WrittenText = styled(.PlaceholderText)`
+    color: ${global.input};
     `;
 
 export const AddToCart = styled.TouchableOpacity`
-    background-color: #705A54;
+    background-color: ${global.primary};
     align-self: center;
     align-items: center;
     justify-content: center;
@@ -102,13 +90,13 @@ export const Filter = styled.TouchableOpacity`
     `;
 
 export const FilterText = styled.Text`
-    color: #705A54;
+    color: ${global.primary};
     font-weight: bold;
     font-size: 20px;
 `;
 
 export const ProdutoCard = styled.View`
-    background-color: white;
+    background-color: ${global.background};
     width: 46%;
     min-width: 180px;
     height:250px;
@@ -133,13 +121,13 @@ export const ProductInfo = styled.View`
 `;
 
 export const TextInfo = styled.Text`
-    color: #705A54;
+    color: ${global.primary};
     font-weight: bold;
     font-size: 16px;
 `;
 
 export const ButtonText = styled.Text`
-    color: #EDEDED;
+    color: ${global.surface};
     font-size: 20px;
 `;
 

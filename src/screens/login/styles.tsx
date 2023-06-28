@@ -1,23 +1,24 @@
 import styled from "styled-components/native";
+import global from "../../themes/global";
 
 export const MainView = styled.View`
   flex: 1;
-  background-color: #ededed;
+  background-color: ${global.surface};
   align-items: center;
   justify-content: center;
 `;
 export const Texto = styled.Text`
   width: 300px;
   font-size: 20px;
-  color: #704032;
+  color: ${global.secondary};
   text-align: center;
 `;
 export const Input = styled.TextInput`
   width: 300px;
   height: 40px;
-  color: #704032;
+  color: ${global.secondary};
   font-size: 20px;
-  background-color: #ffffff;
+  background-color: ${global.background};
   margin: 20px;
   padding-left: 40px;
   border-radius: 5px;
@@ -27,11 +28,11 @@ export const Viewtv = styled.View`
   position: relative;
 `;
 export const TextReg = styled.Text`
-  color: #705a54;
+  color: ${global.primary};
   font-size: 15px;
 `;
 export const TextReg2 = styled.Text`
-  color: #705a54;
+  color: ${global.primary};
   margin-top: 20px;
   font-size: 15px;
 `;
@@ -45,11 +46,11 @@ export const Butao = styled.TouchableOpacity`
   align-items: center;
   height: 50px;
   width: 200px;
-  background-color: #705a54;
+  background-color: ${global.primary};
   border-radius: 10px;
   margin-top: 40px;
 `;
 export const TextLogarrb = styled.Text`
   font-size: 20px;
-  color: white;
+  color: ${global.background};
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components/native"
+import global from "../themes/global"
 
 export const ContainerFoto = styled.View`
     flex-direction: row;
@@ -10,7 +11,7 @@ export const ContainerFoto = styled.View`
 export const TextoDrawer = styled.Text`
     font-size: 17px;
     font-weight: 600;
-    color: #705A54;
+    color: ${global.primary};
 `
 
 export const ImagemDrawer = styled.Image`

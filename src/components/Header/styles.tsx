@@ -1,7 +1,8 @@
 import styled from "styled-components/native";
+import global from "../../themes/global";
 
 export const Body = styled.View`
-    background-color: #D9D9D9;
+    background-color: ${global.surfaceVariant};
     height: 70px;
     width: 100%;
     flex-direction: row;
@@ -20,7 +21,7 @@ background-color: transparent;
 `;
 
 export const HeaderText = styled.Text`
-    color: #704032;
+    color: ${global.secondary};
     font-weight: bold;
     font-size: 32px;
 `;

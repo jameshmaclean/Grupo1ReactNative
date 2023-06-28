@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import global from "../../themes/global";
 
 export const MainContainer = styled.View`
   height: 100%;
@@ -6,7 +7,7 @@ export const MainContainer = styled.View`
   align-items: center;
   justify-content: flex-start;
   padding-top: 30px;
-  background-color: #ededed;
+  background-color: ${global.surface};
 `;
 export const SearchBox = styled.View`
   height: 45px;
@@ -16,7 +17,7 @@ export const SearchBox = styled.View`
   padding-left: 20px;
   border-radius: 50px;
   margin-bottom: 20px;
-  background-color: #ffffff;
+  background-color: ${global.background};
 `;
 
 export const InputSearch = styled.TextInput`
@@ -24,7 +25,7 @@ export const InputSearch = styled.TextInput`
   width: 80%;
   padding-left: 10px;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: ${global.background};
 `;
 
 export const CarrosselContainer = styled.View`
@@ -46,5 +47,5 @@ export const TextRecomendado = styled.Text`
   align-self: flex-start;
   font-size: 28px;
   font-weight: 500;
-  color: #705A54;
+  color: ${global.primary};
 `

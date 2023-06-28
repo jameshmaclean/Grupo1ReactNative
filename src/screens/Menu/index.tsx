@@ -13,7 +13,7 @@ import {
   ProductInfo,
   TextInfo,
 } from "../Produtos/styles";
-import { change } from '../../themes/global';
+import { change, toggleTheme } from '../../themes/global';
 
 
 const imgs = [
@@ -81,7 +81,7 @@ const Menu = ({navigation} : {navigation : any}) => {
       />
 
         </CarrosselContainer>
-        <TextRecomendado onPress={change}>Recomendações</TextRecomendado>
+        <TextRecomendado onPress={toggleTheme}>Recomendações</TextRecomendado>
         <FlatList
           data={aaa}
           renderItem={({ item }) => (

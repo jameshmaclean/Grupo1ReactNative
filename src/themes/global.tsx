@@ -40,4 +40,4 @@ const dark = ['#705454', '#C29C91', '#704032', '#000000', '#ffffff', '#705A54', 
     
   };
   
-export default dtheme;
+export default ltheme;

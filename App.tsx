@@ -4,8 +4,9 @@ import { useState } from "react";
 import { View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import Navigation from "./src/routes/Navigation";
-
+import { ThemeProvider } from "styled-components";
 import AnimatedLottieView from "lottie-react-native";
+import CurThemeProvider from "./src/contexts/themeContext";
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);
@@ -14,7 +15,9 @@ export default function App() {
     <View style={{ flex: 1 }}>
       {loaded === true ? (
         <View style={{ flex: 1 }}>
+          <CurThemeProvider>  
             <Navigation />
+          </CurThemeProvider>
           <StatusBar style="auto" />
         </View>
       ) : (

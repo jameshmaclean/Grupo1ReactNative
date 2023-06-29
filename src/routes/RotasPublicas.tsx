@@ -13,31 +13,37 @@ import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawe
 import { ContainerFoto, ImagemDrawer, TextoDrawer } from "./styles";
 import Header from "../components/Header";
 import { useAuth } from "../contexts/authContext";
+import ThemeButton from "../components/ThemeButton";
+import { CurTheme } from "../contexts/themeContext";
+
 const Drawer = createDrawerNavigator();
 
 function RotasPublicas() {
-  const { logout, user } = useAuth();  return (
+  const { logout, user } = useAuth();  
+  const { light, setLight} = useContext(CurTheme)
 
+  return (
     <NavigationContainer>
       <Drawer.Navigator
         drawerContent={(props) => {
           return (
             <DrawerContentScrollView {...props}>
               <ContainerFoto>
-                <TextoDrawer>Seja bem vindo :)</TextoDrawer>
+                <TextoDrawer style={{color: light ? "#705A54" : "#C29C91"}}>Seja bem vindo :)</TextoDrawer>
               </ContainerFoto>
               <DrawerItemList {...props} />
+              <ThemeButton  change={() => setLight(!light)} light={light} log={false}/>
             </DrawerContentScrollView>
           );
         }}
         screenOptions={{
           header: Header,
           headerShown: true,
-          drawerStyle: { backgroundColor: "#EDEDED", height: "100%" },
+          drawerStyle: { backgroundColor: light ? "#EDEDED" : "#705A54", height: "100%" },
           drawerLabelStyle: {
             fontWeight: "800",
             fontSize: 20,
-            color: "#705A54",
+            color: light ? "#705A54" : "#C29C91",
           },
           drawerActiveBackgroundColor: "#DDC5BE",
         }}
@@ -52,7 +58,7 @@ function RotasPublicas() {
         <Drawer.Screen name="Registro" component={Registro} />
 
         <Drawer.Screen
-          options={{ headerShown: false, swipeEnabled: true }}
+          options={{ headerShown: false, swipeEnabled: true}}
           name="Entrar"
           component={Login}
         />

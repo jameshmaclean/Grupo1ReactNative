@@ -1,8 +1,9 @@
 import styled from "styled-components/native";
 import global from "../../themes/global";
+import { tt } from "../../themes/themeType";
 
 export const Container = styled.View`
-  background-color: ${global.surface};
+  background-color: ${(props : tt) => props.theme.surface};
   align-items: center;
   height: 100%;
   width: 100%;
@@ -15,11 +16,11 @@ export const ProfilePicture = styled.Image`
   margin-bottom: 5%;
   border-radius: 100px;
   border-width: 2px;
-  border-color: ${global.surfaceVariant};
+  border-color: ${(props : tt) => props.theme.surfaceVariant};
 `;
 
 export const TextProfile = styled.Text`
-  background-color: ${global.background};
+  background-color: ${(props : tt) => props.theme.background};
   border-radius: 5px;
   padding: 5px;
   font-size: 20px;
@@ -28,7 +29,7 @@ export const TextProfile = styled.Text`
 `;
 
 export const TextProfileEditing = styled.TextInput`
-  background-color: ${global.background};
+  background-color: ${(props : tt) => props.theme.background};
   border-radius: 5px;
   padding: 5px;
   font-size: 20px;
@@ -38,19 +39,19 @@ export const TextProfileEditing = styled.TextInput`
 export const EditButton = styled.TouchableOpacity`
   width: 75%;
   height: 5%;
-  background-color: ${global.primary};
+  background-color: ${(props : tt) => props.theme.primary};
   margin-bottom: 30px;
   text-align: center;
   border-radius: 5px;
 `;
 export const EditButtonText = styled.Text`
-  color: ${global.background};
+  color: ${(props : tt) => props.theme.background};
   font-size: 20px;
   align-self: center;
 `;
 
 export const ProfileTitle = styled.Text`
-  color: ${global.primary};
+  color: ${(props : tt) => props.theme.primary};
   font-size: 20px;
   font-weight: 800;
   text-align: left;

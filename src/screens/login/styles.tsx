@@ -1,24 +1,25 @@
 import styled from "styled-components/native";
 import global from "../../themes/global";
+import { tt } from "../../themes/themeType";
 
 export const MainView = styled.View`
   flex: 1;
-  background-color: ${global.surface};
+  background-color: ${(props : tt) => props.theme.surface};
   align-items: center;
   justify-content: center;
 `;
 export const Texto = styled.Text`
   width: 300px;
   font-size: 20px;
-  color: ${global.secondary};
+  color: ${(props : tt) => props.theme.secondary};
   text-align: center;
 `;
 export const Input = styled.TextInput`
   width: 300px;
   height: 40px;
-  color: ${global.secondary};
+  color: ${(props : tt) => props.theme.secondary};
   font-size: 20px;
-  background-color: ${global.background};
+  background-color: ${(props : tt) => props.theme.background};
   margin: 20px;
   padding-left: 40px;
   border-radius: 5px;
@@ -28,11 +29,11 @@ export const Viewtv = styled.View`
   position: relative;
 `;
 export const TextReg = styled.Text`
-  color: ${global.primary};
+  color: ${(props : tt) => props.theme.primary};
   font-size: 15px;
 `;
 export const TextReg2 = styled.Text`
-  color: ${global.primary};
+  color: ${(props : tt) => props.theme.primary};
   margin-top: 20px;
   font-size: 15px;
 `;
@@ -46,11 +47,11 @@ export const Butao = styled.TouchableOpacity`
   align-items: center;
   height: 50px;
   width: 200px;
-  background-color: ${global.primary};
+  background-color: ${(props : tt) => props.theme.primary};
   border-radius: 10px;
   margin-top: 40px;
 `;
 export const TextLogarrb = styled.Text`
   font-size: 20px;
-  color: ${global.background};
+  color: ${(props : tt) => props.theme.background};
 `;

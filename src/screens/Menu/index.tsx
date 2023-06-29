@@ -15,7 +15,6 @@ import {
 } from "../Produtos/styles";
 import { change, toggleTheme } from '../../themes/global';
 
-
 const imgs = [
   require('../../assets/images/promo1.webp'),
   require('../../assets/images/promo2.jpg'),
@@ -76,12 +75,11 @@ const Menu = ({navigation} : {navigation : any}) => {
         sliderWidth={width}
         itemWidth={250}
         inactiveSlideScale={1}
-        inactiveSlideOpacity={1}
-        
+        inactiveSlideOpacity={1} 
       />
 
         </CarrosselContainer>
-        <TextRecomendado onPress={toggleTheme}>Recomendações</TextRecomendado>
+        <TextRecomendado>Recomendações</TextRecomendado>
         <FlatList
           data={aaa}
           renderItem={({ item }) => (

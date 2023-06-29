@@ -1,8 +1,9 @@
 import styled from "styled-components/native";
 import global from "../../themes/global";
+import { tt } from "../../themes/themeType";
 
 export const Header = styled.View`
-    background-color: ${global.surfaceVariant};
+    background-color: ${(props : tt) => props.theme.surfaceVariant};
     height: 70px;
     width: 100%;
     flex-direction: row;
@@ -21,7 +22,7 @@ background-color: transparent;
 `;
 
 export const HeaderText = styled.Text`
-    color: ${global.secondary};
+    color: ${(props : tt) => props.theme.secondary};
     font-weight: bold;
     font-size: 32px;
 `;
@@ -31,11 +32,11 @@ export const Container = styled.View `
     width: 100%;
     justify-content: center;
     align-items: center;
-    background-color: ${global.surface};
+    background-color: ${(props : tt) => props.theme.surface};
 `;
 
 export const SearchBar = styled.TextInput`
-    background-color: ${global.background};
+    background-color: ${(props : tt) => props.theme.background};
     border-radius: 10px;
     width: 80%;
     height: 45px;
@@ -54,7 +55,7 @@ export const ContainerProdutos = styled.View`
 
 
 export const InputButton = styled.TouchableOpacity`
-    background-color: ${global.background};
+    background-color: ${(props : tt) => props.theme.background};
     border-radius: 10px;
     width: 80%;
     height: 45px;
@@ -65,15 +66,15 @@ export const InputButton = styled.TouchableOpacity`
     `;
 
 export const PlaceholderText = styled.Text`
-    color: ${global.placeholder};
+    color: ${(props : tt) => props.theme.placeholder};
     `; 
 
 export const WrittenText = styled(PlaceholderText)`
-    color: ${global.input};
+    color: ${(props : tt) => props.theme.input};
     `;
 
 export const AddToCart = styled.TouchableOpacity`
-    background-color: ${global.primary};
+    background-color: ${(props : tt) => props.theme.primary};
     align-self: center;
     align-items: center;
     justify-content: center;
@@ -90,13 +91,13 @@ export const Filter = styled.TouchableOpacity`
     `;
 
 export const FilterText = styled.Text`
-    color: ${global.primary};
+    color: ${(props : tt) => props.theme.primary};
     font-weight: bold;
     font-size: 20px;
 `;
 
 export const ProdutoCard = styled.View`
-    background-color: ${global.background};
+    background-color: ${(props : tt) => props.theme.background};
     width: 46%;
     min-width: 180px;
     height:250px;
@@ -121,13 +122,13 @@ export const ProductInfo = styled.View`
 `;
 
 export const TextInfo = styled.Text`
-    color: ${global.primary};
+    color: ${(props : tt) => props.theme.primary};
     font-weight: bold;
     font-size: 16px;
 `;
 
 export const ButtonText = styled.Text`
-    color: ${global.background};
+    color: ${(props : tt) => props.theme.background};
     font-size: 20px;
 `;
 

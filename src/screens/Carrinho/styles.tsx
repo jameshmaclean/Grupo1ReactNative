@@ -1,10 +1,11 @@
 import styled from "styled-components/native";
 import global from "../../themes/global";
+import { tt } from "../../themes/themeType";
 
 export const Title = styled.Text`
   font-size: 40px;
   font-weight: bold;
-  color: ${global.primary};
+  color: ${(props : tt) => props.theme.primary};
   margin-left: 20px;
 `;
 
@@ -16,7 +17,7 @@ export const RowTitle = styled.View`
 `;
 
 export const CardCarrinho = styled.View`
-  background-color: ${global.background};
+  background-color: ${(props : tt) => props.theme.background};
   border-radius: 10px;
   width: 90%;
   height: 200px;
@@ -33,7 +34,7 @@ export const ContainerCarrinho = styled.View`
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: ${global.surface};
+  background-color: ${(props : tt) => props.theme.surface};
 `;
 export const ImagemCarrinho = styled.Image`
   height: 200px;
@@ -45,12 +46,12 @@ export const CardText = styled.View``;
 export const CartTitle = styled.Text`
   font-size: 30px;
   font-weight: 900;
-  color:${global.primary};
+  color:${(props : tt) => props.theme.primary};
 `;
 export const CartQt = styled.Text`
   font-size: 17px;
   font-weight: 600;
-  color: ${global.primary};
+  color: ${(props : tt) => props.theme.primary};
   align-self: flex-start;
 `;
 
@@ -61,7 +62,7 @@ export const CartNum = styled.Text`
 
 export const Remove = styled.TouchableOpacity`
   margin-top: 15px;
-  background-color: ${global.primary};
+  background-color: ${(props : tt) => props.theme.primary};
   width: 100%;
   height: 17%;
   border-radius: 5px;
@@ -69,12 +70,12 @@ export const Remove = styled.TouchableOpacity`
   justify-content: center;
 `;
 export const RemoveText = styled.Text`
-  color: ${global.background};
+  color: ${(props : tt) => props.theme.background};
   font-weight: 800;
 `;
 
 export const ContainerTotal = styled.View`
-  background-color: ${global.surface};
+  background-color: ${(props : tt) => props.theme.surface};
   width: 100%;
   height: 20%;
   justify-content: center;
@@ -86,14 +87,14 @@ export const TextTotal = styled.Text`
   align-self: center;
   border-radius: 10px;
   font-weight: 700;
-  color: ${global.primary};
+  color: ${(props : tt) => props.theme.primary};
   font-size: 20px;
 `;
 
 export const Finish = styled.TouchableOpacity`
   width: 60%;
   height: 35%;
-  background-color: ${global.primary};
+  background-color: ${(props : tt) => props.theme.primary};
   border-radius: 7px;
   align-self: center;
   justify-content: center;
@@ -101,14 +102,14 @@ export const Finish = styled.TouchableOpacity`
 `;
 
 export const FinishText = styled.Text`
-  color: ${global.background};
+  color: ${(props : tt) => props.theme.background};
   font-weight: 800;
   align-self: center;
   font-size: 20px;
 `;
 
 export const TextTotalValor = styled.Text`
-  color: ${global.primaryVariantOne};
+  color: ${(props : tt) => props.theme.primaryVariantOne};
   font-weight: 900;
   font-size: 30px;
 `;
@@ -118,7 +119,7 @@ export const ContainerText = styled.View`
     height: 90%;
     width: 90%;
     align-self: center;
-    background-color: ${global.background};
+    background-color: ${(props : tt) => props.theme.background};
     padding: 10px;
     border-radius: 10px;
 `

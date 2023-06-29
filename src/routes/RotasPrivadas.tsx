@@ -14,10 +14,15 @@ import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawe
 import { ContainerFoto, ImagemDrawer, TextoDrawer } from "./styles";
 import Header from "../components/Header";
 import { useAuth } from "../contexts/authContext";
+import { CurTheme } from "../contexts/themeContext";
+import ThemeButton from "../components/ThemeButton";
+
 const Drawer = createDrawerNavigator();
 
 function RotasPrivadas() {
   const { logout, user, perfil } = useAuth();
+  const { light, setLight } = useContext(CurTheme)
+
   {console.log('USER ROTAS', user)}
   return (
     <NavigationContainer>
@@ -27,21 +32,22 @@ function RotasPrivadas() {
             <DrawerContentScrollView {...props}>
               <ContainerFoto>
                 <ImagemDrawer source={{ uri: perfil }} resizeMode="cover" />
-                <TextoDrawer>{user.nome}</TextoDrawer>
+                <TextoDrawer style={{color: light ? "#705A54" : "#C29C91"}}>{user.nome}</TextoDrawer>
               </ContainerFoto>
               <DrawerItemList {...props} />
-              <DrawerItem label={'Sair'} onPress={()=> logout()} labelStyle={{fontWeight: "800", fontSize: 20, color: "#705A54",}}/>
+              <DrawerItem label={'Sair'} onPress={()=> logout()} labelStyle={{fontWeight: "800", fontSize: 20, color: light ? "#705A54" : "#C29C91"}}/>
+              <ThemeButton  change={() => setLight(!light)} light={light} log={true}/>
             </DrawerContentScrollView>
           );
         }}
         screenOptions={{
           header: Header,
           headerShown: true,
-          drawerStyle: { backgroundColor: "#EDEDED", height: "100%" },
+          drawerStyle: { backgroundColor: light ? "#EDEDED" : "#705A54", height: "100%" },
           drawerLabelStyle: {
             fontWeight: "800",
             fontSize: 20,
-            color: "#705A54",
+            color: light ? "#705A54" : "#C29C91"
           },
           drawerActiveBackgroundColor: "#DDC5BE",
         }}

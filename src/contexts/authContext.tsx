@@ -4,10 +4,6 @@ import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { IUser } from "../Model/User";
 import { UserById, UserPic } from "../services/usuario";
-import * as FileSystem from 'expo-file-system';
-
-
-
 
 interface IAuthState {
   accessToken: string;
@@ -34,19 +30,21 @@ interface IProps {
 
 export interface IUserData {
   id: number;
-  telefone:string;
+  telefone: string;
   compra: boolean;
-  venda:boolean;
+  venda: boolean;
   data: string;
   url: string;
   nome: string;
   email: string;
   nomeUser: string;
+  numero: string;
   cpf: string;
   cep: string;
   complemento: string;
   user: any;
   endereco: any;
+  password: string;
 }
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -57,7 +55,7 @@ console.log(tokenData, userData);
 const AuthProvider: React.FC<IProps> = ({ children }) => {
   const [user, setUser] = React.useState<IUserData>({} as IUserData);
   const [data, setData] = React.useState<IAuthState>({} as IAuthState);
-  const [perfil, setPerfil] = React.useState("");
+  const [perfil, setPerfil] = React.useState("https://wp-content.bluebus.com.br/wp-content/uploads/2017/03/31142426/twitter-novo-avatar-padrao-2017-bluebus-660x440.png");
   React.useEffect(() => {
     async function loadAuthData() {
       const accessToken = await AsyncStorage.getItem(tokenData);
@@ -65,7 +63,7 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
       if (accessToken && id) {
         setData({ accessToken, id: JSON.parse(id) });
         api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-        getUser(JSON.parse(id));
+        await getUser(JSON.parse(id));
       }
     }
     loadAuthData();
@@ -73,7 +71,7 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
 
   const login = async ({ username, password }: ICredentials) => {
     try {
-      console.log(username, password)
+      console.log(username, password);
       const response = await api.post("/auth/signin", { username, password });
       console.log("dados", response);
       const { accessToken, id } = response.data;
@@ -82,7 +80,7 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
       console.log(accessToken, id);
       api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
       setData({ accessToken, id });
-      getUser(id);
+      await getUser(id);
     } catch (error) {
       Alert.alert("Erro na autenticação", "Ocorreu um erro ao fazer login");
       console.log(error);
@@ -94,13 +92,19 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
     setData({} as IAuthState);
   };
 
-  const getUser = async (id: number) => {
-    const response = await UserById(id);
-    console.log(response.data);
-    setUser(response.data);
-    setPerfil(`http://187.58.100.32:8081/g1/usuario/${id}/foto`);
-    console.log(perfil)
+  const getUser = async (id: IUser) => {
+    try {
+      const response = await UserById(id);
+      const userData = await response;
+      setUser(userData);
+      setPerfil(`http://187.58.100.32:8081/g1/usuario/${id}/foto`);
+      console.log(id);
+    } catch (error) {
+      console.log("Erro ao obter dados do usuário:", error);
+    }
   };
+
+
   return (
     <AuthContext.Provider
       value={{ perfil, setUser, user, id: data.id, login, logout }}
@@ -112,7 +116,6 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
 
 export const useAuth = (): IAuthContext => {
   const context = React.useContext(AuthContext);
-  // console.log("Contexto", context);
   if (!context) {
     throw new Error("Use auth deve ser utilizado com um AuthProvider");
   }

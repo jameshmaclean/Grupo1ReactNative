@@ -28,12 +28,12 @@ import {
   Filter,
   FilterText,
 } from "./styles";
-import{SearchBox, InputSearch} from '../Menu/style'
+import { SearchBox, InputSearch } from "../Menu/style";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
 import aaa from "../../assets/data/aaa";
-import { listProduct } from "../../services/produto";
-
+import { ProductById, listProduct } from "../../services/produto";
+import { useCart } from "../../contexts/cartContext";
 
 type Types = {
   value: string;
@@ -42,56 +42,78 @@ type Types = {
   overlay?: (value: boolean) => void;
 };
 
-
 type ItemProps = {
   name: string;
   image: string;
   price: string;
+  id: number;
 };
 
-const Item = ({ name, image, price }: ItemProps) => (
-  <ProdutoCard>
-    <ProductImage source={{ uri: image }} />
-    <ProductInfo>
-      <TextInfo>{name}</TextInfo>
-      <TextInfo>R$ {price}</TextInfo>
-    </ProductInfo>
-    <AddToCart>
-      <ButtonText>Comprar</ButtonText>
-    </AddToCart>
-  </ProdutoCard>
-);
+const Item = ({ name, image, price, id }: ItemProps) => {
+  const { cart, setCart } = useCart();
+  console.log(id);
 
-const Produtos = ({ route , navigation} : {route : any, navigation : any}) => {
-  const { menuBusca } = route.params || ""
+  const handleCart = async (id) => {
+    console.log("Entrei");
+    const response = await ProductById(id);
+    const novoItem = await response.data;
+    const produtoComQuantidade = { ...novoItem, quantidade: 1 };
+    setCart((prevCart) => [...prevCart, produtoComQuantidade]);
+    console.log("SOU U CARRINHO", cart);
+  };
+
+  return (
+    <ProdutoCard>
+      <ProductImage source={{ uri: image }} />
+      <ProductInfo>
+        <TextInfo numberOfLines={1}>{name}</TextInfo>
+        <TextInfo>R$ {price}</TextInfo>
+      </ProductInfo>
+      <AddToCart onPress={() => handleCart(id)}>
+        <ButtonText>Comprar</ButtonText>
+      </AddToCart>
+    </ProdutoCard>
+  );
+};
+
+const Produtos = ({ route, navigation }: { route: any; navigation: any }) => {
+  const { menuBusca } = route.params || "";
   const [busca, setBusca] = useState("");
   const [overlay, setOverlay] = useState(false);
+  const [produtosOrg, setProdutosOrg] = useState([]);
 
   const [resultadosBusca, setResultadosBusca] = useState([]);
 
-  useEffect(() => {listaAPI(), buscarProdutos(menuBusca || "")},[])
+  useEffect(() => {
+    listaAPI(), buscarProdutos(menuBusca || "");
+  }, []);
 
-  const buscarProdutos = (termoBusca : string) => {
-    const resultados = resultadosBusca.filter((item) =>
-      item.nome.toLowerCase().includes(termoBusca.toLowerCase())
-    );
-    setResultadosBusca(resultados);
+  const buscarProdutos = (termoBusca: string) => {
+    if (termoBusca.trim() === "") {
+      setResultadosBusca(produtosOrg);
+    } else {
+      const resultados = resultadosBusca.filter((item) =>
+        item.nome.toLowerCase().includes(termoBusca.toLowerCase())
+      );
+      setResultadosBusca(resultados);
+    }
   };
 
   const listaAPI = async () => {
-    const { data } : { data : any} = await listProduct();
-    console.log("nossa lista: ",resultadosBusca)
-    setResultadosBusca(data)
-  }
+    const { data }: { data: any } = await listProduct();
+    console.log("nossa lista: ", resultadosBusca);
+    setResultadosBusca(data);
+    setProdutosOrg(data);
+  };
 
   return (
     <>
       <Container>
-        <SearchBox style={{marginTop: 30}}>
-          <AntDesign name="search1" size={24} color="#705A54"/>
+        <SearchBox style={{ marginTop: 30 }}>
+          <AntDesign name="search1" size={24} color="#705A54" />
           {/* <SearchBar placeholder="Busca" */}
           <TextInput
-            style={{marginLeft: 10, width: '90%'}}
+            style={{ marginLeft: 10, width: "90%" }}
             placeholder="Busca"
             blurOnSubmit={true}
             onChangeText={buscarProdutos}
@@ -111,9 +133,14 @@ const Produtos = ({ route , navigation} : {route : any, navigation : any}) => {
         <FlatList
           data={resultadosBusca.length > 0 ? resultadosBusca : []}
           renderItem={({ item }) => (
-            <Item name={item.nome} image={item.url} price={item.valorUnitario} />
+            <Item
+              name={item.nome}
+              image={item.url}
+              price={item.valorUnitario}
+              id={item.produtoId}
+            />
           )}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.produtoId.toString()}
           numColumns={2}
           columnWrapperStyle={{ gap: 10, justifyContent: "center" }}
           showsVerticalScrollIndicator={false}

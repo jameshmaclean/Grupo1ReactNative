@@ -1,7 +1,4 @@
 import "react-native-gesture-handler";
-import { useContext } from "react";
-import Carrinho from "../screens/Carrinho";
-import Profile from "../screens/Perfil";
 import Produtos from "../screens/Produtos";
 import Registro from "../screens/Registro";
 import Login from "../screens/login";

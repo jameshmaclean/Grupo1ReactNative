@@ -1,24 +1,25 @@
 import "react-native-gesture-handler";
-import { useContext } from "react";
 import Carrinho from "../screens/Carrinho";
 import Profile from "../screens/Perfil";
 import Produtos from "../screens/Produtos";
 import Registro from "../screens/Registro";
-import Login from "../screens/login";
 import { DrawerItem, createDrawerNavigator } from "@react-navigation/drawer";
 import Menu from "../screens//Menu";
 import PaginaProduto from "../screens/PaginaProduto";
 import { NavigationContainer } from "@react-navigation/native";
-import RotasPublicas from "./RotasPublicas";
-import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
+import {
+  DrawerContentScrollView,
+  DrawerItemList,
+} from "@react-navigation/drawer";
 import { ContainerFoto, ImagemDrawer, TextoDrawer } from "./styles";
 import Header from "../components/Header";
 import { useAuth } from "../contexts/authContext";
+import Categoria from "../screens/Categoria";
+
 const Drawer = createDrawerNavigator();
 
 function RotasPrivadas() {
   const { logout, user, perfil } = useAuth();
-  {console.log('USER ROTAS', user)}
   return (
     <NavigationContainer>
       <Drawer.Navigator
@@ -26,11 +27,21 @@ function RotasPrivadas() {
           return (
             <DrawerContentScrollView {...props}>
               <ContainerFoto>
-                <ImagemDrawer source={{ uri: perfil }} resizeMode="cover" />
+                {user ? (
+                  <ImagemDrawer source={{ uri: perfil }} resizeMode="cover" />
+                ) : null}
                 <TextoDrawer>{user.nome}</TextoDrawer>
               </ContainerFoto>
               <DrawerItemList {...props} />
-              <DrawerItem label={'Sair'} onPress={()=> logout()} labelStyle={{fontWeight: "800", fontSize: 20, color: "#705A54",}}/>
+              <DrawerItem
+                label={"Sair"}
+                onPress={() => logout()}
+                labelStyle={{
+                  fontWeight: "800",
+                  fontSize: 20,
+                  color: "#705A54",
+                }}
+              />
             </DrawerContentScrollView>
           );
         }}
@@ -53,6 +64,8 @@ function RotasPrivadas() {
           component={Produtos}
         />
         <Drawer.Screen name="Perfil" component={Profile} />
+        <Drawer.Screen name="Categorias" component={Categoria} />
+
         <Drawer.Screen name="Produto" component={PaginaProduto} />
         <Drawer.Screen name="Registro" component={Registro} />
         <Drawer.Screen name="Carrinho" component={Carrinho} />

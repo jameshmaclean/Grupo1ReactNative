@@ -1,14 +1,11 @@
 import React, {useState} from 'react'
 import { ScrollView, View, Image, Button } from 'react-native';
 import {Container, Title, FormGroup, Input, ButtonText, Button1} from './styles'
-<<<<<<< HEAD
 import { Preechimento } from './styles';
-=======
 import axios from 'axios';
 import { api } from '../../services/api';
 import * as ImagePicker from 'expo-image-picker';
 import FormData from 'form-data';
->>>>>>> f34a6402cafd7f716161120d095aa1b80cab2f8b
 
 const Registro = () => {
 

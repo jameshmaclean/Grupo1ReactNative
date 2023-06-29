@@ -2,6 +2,7 @@ import "react-native-gesture-handler";
 import Produtos from "../screens/Produtos";
 import Registro from "../screens/Registro";
 import Login from "../screens/login";
+import {useContext} from 'react'
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Menu from "../screens//Menu";
 import PaginaProduto from "../screens/PaginaProduto";

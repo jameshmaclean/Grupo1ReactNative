@@ -13,7 +13,6 @@ import {
   TextoBotao,
 } from "./styles";
 import { Ionicons } from "@expo/vector-icons";
-import { Modal } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 interface ScreenNavigationProp {
@@ -23,11 +22,10 @@ interface ScreenNavigationProp {
 const PaginaProduto = () => {
   const { navigate } = useNavigation<ScreenNavigationProp>();
   return (
-    <Modal visible={true}>
       <PageProduto>
         <ContainerProduto>
           <Ionicons
-            onPress={() => navigate("Menu")}
+            onPress={()=> navigate('Menu')}
             name="arrow-back"
             size={50}
             color="#705A54"
@@ -56,7 +54,6 @@ const PaginaProduto = () => {
           </Botao>
         </ContainerComprar>
       </PageProduto>
-    </Modal>
   );
 };
 

@@ -10,11 +10,12 @@ import {
   ProfileTitle,
 } from "./styles";
 import { useAuth } from "../../contexts/authContext";
-import { UserPic, UserUpdate } from "../../services/usuario";
+import { UserUpdate } from "../../services/usuario";
+import { userType } from "../../services/usuario";
 
 const Profile = () => {
   const [edit, setEdit] = useState(false);
-  const { perfil, user, setUser } = useAuth();
+  const { perfil, user, setUser, id } = useAuth();
 
   const handleEdit = () => {
     setEdit(!edit);
@@ -24,13 +25,31 @@ const Profile = () => {
     setUser((userAntigo: any) => ({ ...userAntigo, [campo]: valor }));
   };
 
-  const handleSubmit = () => {
-    UserUpdate(user.id, user);
+  const handleSubmit = async () => {
+    const response = await UserUpdate(id, novoUsuario as userType);
+    setUser(response.data)
+  };
+
+  const novoUsuario = {
+    nome: user.nome,
+    nomeUser: user.user.username,
+    telefone: user.telefone,
+    email: user.user.email,
+    cpf: user.cpf,
+    compra: user.compra,
+    venda: user.venda,
+    data: "2023-06-28", // Nova data definida manualmente
+    cep: user.endereco.cep,
+    numero: user.endereco.numero,
+    complemento: user.endereco.complemento,
+    password: user.user.password,
+    roles: user.user.roles.map((role: { name: string }) => role.name),
+    url: ""
   };
 
   return (
     <Container>
-      <ProfilePicture source={{ uri: "aaaaa" }} />
+      <ProfilePicture  source={{uri: perfil}} />
       <ProfileTitle>Informações da conta:</ProfileTitle>
       <ScrollView contentContainerStyle={{ width: "100%" }}>
         {edit === false ? (
@@ -91,7 +110,7 @@ const Profile = () => {
         )}
       </ScrollView>
       {edit ? (
-        <EditButton onPress={handleEdit}>
+        <EditButton onPress={handleSubmit}>
           <EditButtonText>Enviar</EditButtonText>
         </EditButton>
       ) : (

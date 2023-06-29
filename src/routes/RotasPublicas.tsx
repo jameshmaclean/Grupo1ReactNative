@@ -24,8 +24,7 @@ function RotasPublicas() {
           return (
             <DrawerContentScrollView {...props}>
               <ContainerFoto>
-                <ImagemDrawer source={{ uri: user.url }} resizeMode="cover" />
-                <TextoDrawer>{user.nome}</TextoDrawer>
+                <TextoDrawer>Seja bem vindo :)</TextoDrawer>
               </ContainerFoto>
               <DrawerItemList {...props} />
             </DrawerContentScrollView>

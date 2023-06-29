@@ -41,11 +41,9 @@ export interface IUserData {
   url: string;
   nome: string;
   email: string;
-  userName: string;
+  nomeUser: string;
   cpf: string;
   cep: string;
-  uf: string;
-  cidade: string;
   complemento: string;
   user: any;
   endereco: any;
@@ -75,8 +73,9 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
 
   const login = async ({ username, password }: ICredentials) => {
     try {
+      console.log(username, password)
       const response = await api.post("/auth/signin", { username, password });
-      console.log("dados", response.data);
+      console.log("dados", response);
       const { accessToken, id } = response.data;
       await AsyncStorage.setItem(tokenData, accessToken);
       await AsyncStorage.setItem(userData, JSON.stringify(id));
@@ -98,6 +97,9 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
   const getUser = async (id: number) => {
     const response = await UserById(id);
     console.log(response.data);
+    setUser(response.data);
+    setPerfil(`http://187.58.100.32:8081/g1/usuario/${id}/foto`);
+    console.log(perfil)
   };
   return (
     <AuthContext.Provider
@@ -110,7 +112,7 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
 
 export const useAuth = (): IAuthContext => {
   const context = React.useContext(AuthContext);
-  console.log("Contexto", context);
+  // console.log("Contexto", context);
   if (!context) {
     throw new Error("Use auth deve ser utilizado com um AuthProvider");
   }

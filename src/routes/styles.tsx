@@ -11,6 +11,7 @@ export const ContainerFoto = styled.View`
 export const TextoDrawer = styled.Text`
     font-size: 17px;
     font-weight: 600;
+    margin-left: 20px;
     color: ${global.primary};
 `
 

@@ -2,7 +2,7 @@ import { IUser } from "../Model/User";
 import { api } from "./api";
 import { IUserData } from "../contexts/authContext";
 
-type userType = {
+export interface userType {
   email: string;
   nome: string;
   nomeUser: string;
@@ -17,7 +17,7 @@ type userType = {
   password: string;
   roles: string[];
   url: string;
-};
+}
 
 export const UserRegister = async (user: userType) => {
   const produto = await api.get("usuario/inserir", {
@@ -47,9 +47,15 @@ export const UserRegister = async (user: userType) => {
   return produto;
 };
 
-export const UserUpdate = async (id: number, user: IUserData) => {
-  const produto = await api.put("usuario/atualizar/" + id, user)
-  return produto;
+export const UserUpdate = async (id: IUser, user: userType) => {
+  try {
+    console.log("USER QUE CHEGOU NO UPDATE", user);
+    const produto = await api.put("usuario/atualizar/" + id, user);
+    return produto;
+  } catch (error) {
+    console.log("Erro na atualização do usuário:", error);
+    throw error;
+  }
 };
 
 export const UserById = async (id: number) => {

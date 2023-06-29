@@ -17,7 +17,7 @@ import { useAuth } from "../contexts/authContext";
 const Drawer = createDrawerNavigator();
 
 function RotasPrivadas() {
-  const { logout, user } = useAuth();
+  const { logout, user, perfil } = useAuth();
   {console.log('USER ROTAS', user)}
   return (
     <NavigationContainer>
@@ -26,7 +26,7 @@ function RotasPrivadas() {
           return (
             <DrawerContentScrollView {...props}>
               <ContainerFoto>
-                <ImagemDrawer source={{ uri: user.url }} resizeMode="cover" />
+                <ImagemDrawer source={{ uri: perfil }} resizeMode="cover" />
                 <TextoDrawer>{user.nome}</TextoDrawer>
               </ContainerFoto>
               <DrawerItemList {...props} />

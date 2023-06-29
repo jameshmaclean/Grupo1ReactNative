@@ -23,7 +23,7 @@ const Drawer = createDrawerNavigator();
 
 function RotasPrivadas() {
   const { logout, user, perfil } = useAuth();
-  const { light, setLight } = useContext(CurTheme)
+  const { light, setLight } = useContext<any>(CurTheme)
 
   {console.log('USER ROTAS', user)}
   return (
@@ -62,8 +62,6 @@ function RotasPrivadas() {
         />
         <Drawer.Screen name="Perfil" component={Profile} />
         <Drawer.Screen name="Categorias" component={Categoria} />
-
-        <Drawer.Screen name="Produto" component={PaginaProduto} />
         <Drawer.Screen name="Registro" component={Registro} />
         <Drawer.Screen name="Carrinho" component={Carrinho} />
       </Drawer.Navigator>

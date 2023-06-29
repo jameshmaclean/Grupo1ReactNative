@@ -1,5 +1,11 @@
-import React from "react";
-import { View, Dimensions, ScrollView } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Dimensions,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
 import {
   CarrosselContainer,
   CarrouselImg,
@@ -21,7 +27,8 @@ import {
   ProductInfo,
   TextInfo,
 } from "../Produtos/styles";
-import { listProduct } from "../../services/produto";
+import { ProductById, listProduct } from "../../services/produto";
+import PaginaProduto from "../PaginaProduto";
 
 const imgs = [
   require("../../assets/images/promo1.webp"),
@@ -33,26 +40,44 @@ type ItemProps = {
   name: string;
   image: string;
   price: string;
+  produto:any
 };
 
-const Item = ({ name, image, price }: ItemProps) => (
-  <ProdutoCard>
-    <ProductImage source={{ uri: image }} />
-    <ProductInfo>
-      <TextInfo numberOfLines={1}>{name}</TextInfo>
-      <TextInfo>R$ {price}</TextInfo>
-    </ProductInfo>
-    <AddToCart>
-      <ButtonText>Comprar</ButtonText>
-    </AddToCart>
-  </ProdutoCard>
-);
+const Item = ({ name, image, price, produto }: ItemProps) => {
+  const [selectedProduct, setSelectedProduct] = React.useState<ItemProps | null>(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleVerMais = () => {
+    setSelectedProduct(produto);
+    setModalVisible(true);
+  };
+  return (
+    <ProdutoCard>
+      <ProductImage source={{ uri: image }} />
+      <ProductInfo>
+        <TextInfo numberOfLines={1}>{name}</TextInfo>
+        <TextInfo>R$ {price}</TextInfo>
+      </ProductInfo>
+      <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <AddToCart onPress={() => setModalVisible(true)}>
+          <ButtonText>Ver mais</ButtonText>
+        </AddToCart>
+      </TouchableOpacity>
+      <Modal
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <PaginaProduto/>
+      </Modal>
+    </ProdutoCard>
+  );
+};
 
 const Menu = ({ navigation }: { navigation: any }) => {
   const width: number = Dimensions.get("window").width;
   const isCarousel = useRef(null);
-  const [lista, setLista] = React.useState([]);
-  const [listaExibicao, setListaExibicao] = React.useState([]);
+  const [lista, setLista] = useState([]);
+  const [listaExibicao, setListaExibicao] = useState([]);
 
   const listaAPI = async () => {
     const { data }: { data: [] } = await listProduct();
@@ -77,7 +102,6 @@ const Menu = ({ navigation }: { navigation: any }) => {
       <MainContainer>
         <SearchBox>
           <AntDesign name="search1" size={24} color="#705A54" />
-          {/* <SearchBar placeholder="Busca" */}
           <InputSearch
             placeholder="Busca"
             blurOnSubmit={true}
@@ -104,7 +128,7 @@ const Menu = ({ navigation }: { navigation: any }) => {
           <Carousel
             autoplay
             layoutCardOffset={50}
-            autoplayInterval={3000} // Defina o intervalo de tempo entre os slides em milissegundos
+            autoplayInterval={3000}
             vertical={false}
             layout="default"
             ref={isCarousel}
@@ -124,6 +148,7 @@ const Menu = ({ navigation }: { navigation: any }) => {
               name={item.nome}
               image={item.url}
               price={item.valorUnitario}
+              produto = {item}
             />
           )}
           keyExtractor={(item) => item.produtoId}

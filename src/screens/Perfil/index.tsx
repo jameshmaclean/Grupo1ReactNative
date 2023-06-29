@@ -27,29 +27,28 @@ const Profile = () => {
 
   const handleSubmit = async () => {
     const response = await UserUpdate(id, novoUsuario as userType);
-    setUser(response.data)
+    setUser(response.data);
   };
 
   const novoUsuario = {
     nome: user.nome,
-    nomeUser: user.user.username,
+    nomeUser: user.nomeUser,
     telefone: user.telefone,
-    email: user.user.email,
+    email: user.email,
     cpf: user.cpf,
     compra: user.compra,
     venda: user.venda,
     data: "2023-06-28", // Nova data definida manualmente
-    cep: user.endereco.cep,
-    numero: user.endereco.numero,
-    complemento: user.endereco.complemento,
-    password: user.user.password,
-    roles: user.user.roles.map((role: { name: string }) => role.name),
-    url: ""
+    cep: user.cep,
+    numero: user.numero,
+    complemento: user.complemento,
+    password: user.password,
+    url: "",
   };
 
   return (
     <Container>
-      <ProfilePicture  source={{uri: perfil}} />
+      {perfil ? <ProfilePicture source={{ uri: perfil }} /> : null}
       <ProfileTitle>Informações da conta:</ProfileTitle>
       <ScrollView contentContainerStyle={{ width: "100%" }}>
         {edit === false ? (
@@ -57,19 +56,15 @@ const Profile = () => {
             <ProfileTitle>Nome:</ProfileTitle>
             <TextProfile>{user.nome}</TextProfile>
             <ProfileTitle>E-mail:</ProfileTitle>
-            <TextProfile>{user.user.email}</TextProfile>
+            <TextProfile>{user.email}</TextProfile>
             <ProfileTitle>Username:</ProfileTitle>
-            <TextProfile>{user.user.username}</TextProfile>
+            <TextProfile>{user.nomeUser}</TextProfile>
             <ProfileTitle>CPF:</ProfileTitle>
             <TextProfile>{user.cpf}</TextProfile>
             <ProfileTitle>CEP:</ProfileTitle>
-            <TextProfile>{user.endereco.cep}</TextProfile>
-            <ProfileTitle>UF:</ProfileTitle>
-            <TextProfile>{user.endereco.uf}</TextProfile>
-            <ProfileTitle>Cidade:</ProfileTitle>
-            <TextProfile>{user.endereco.localidade}</TextProfile>
+            <TextProfile>{user.cep}</TextProfile>
             <ProfileTitle>Complemento:</ProfileTitle>
-            <TextProfile>{user.endereco.complemento}</TextProfile>
+            <TextProfile>{user.complemento}</TextProfile>
           </>
         ) : (
           <>
@@ -78,11 +73,11 @@ const Profile = () => {
               onChangeText={(value) => handleChange("nome", value)}
             />
             <TextProfileEditing
-              defaultValue={user.user.email}
+              defaultValue={user.email}
               onChangeText={(value) => handleChange("email", value)}
             />
             <TextProfileEditing
-              defaultValue={user.user.username}
+              defaultValue={user.nomeUser}
               onChangeText={(value) => handleChange("username", value)}
             />
             <TextProfileEditing
@@ -91,19 +86,12 @@ const Profile = () => {
               onChangeText={(value) => handleChange("cpf", value)}
             />
             <TextProfileEditing
-              defaultValue={user.endereco.cep}
+              defaultValue={user.cep}
               onChangeText={(value) => handleChange("cep", value)}
             />
+
             <TextProfileEditing
-              defaultValue={user.endereco.uf}
-              onChangeText={(value) => handleChange("uf", value)}
-            />
-            <TextProfileEditing
-              defaultValue={user.endereco.localidade}
-              onChangeText={(value) => handleChange("cidade", value)}
-            />
-            <TextProfileEditing
-              defaultValue={user.endereco.complemento}
+              defaultValue={user.complemento}
               onChangeText={(value) => handleChange("complemento", value)}
             />
           </>

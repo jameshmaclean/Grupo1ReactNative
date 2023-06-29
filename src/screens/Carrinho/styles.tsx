@@ -20,12 +20,12 @@ export const CardCarrinho = styled.View`
   background-color: ${(props : tt) => props.theme.background};
   border-radius: 10px;
   width: 90%;
-  height: 200px;
+  height: 450px;
   align-items: center;
   align-self: center;
   margin-bottom: 20px;
   padding: 10px;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
 `;
 
@@ -37,11 +37,13 @@ export const ContainerCarrinho = styled.View`
   background-color: ${(props : tt) => props.theme.surface};
 `;
 export const ImagemCarrinho = styled.Image`
-  height: 200px;
-  width: 150px;
+  height: 220px;
+  width: 350px;
 `;
 
-export const CardText = styled.View``;
+export const CardText = styled.View`
+  height: 500px;
+`;
 
 export const CartTitle = styled.Text`
   font-size: 30px;
@@ -63,15 +65,18 @@ export const CartNum = styled.Text`
 export const Remove = styled.TouchableOpacity`
   margin-top: 15px;
   background-color: ${(props : tt) => props.theme.primary};
-  width: 100%;
-  height: 17%;
+  width: 300px;
+  height: 10%;
   border-radius: 5px;
   align-items: center;
   justify-content: center;
 `;
 export const RemoveText = styled.Text`
   color: ${(props : tt) => props.theme.background};
+  text-align: center;
+  width: 100%;
   font-weight: 800;
+  font-size: 20px;
 `;
 
 export const ContainerTotal = styled.View`

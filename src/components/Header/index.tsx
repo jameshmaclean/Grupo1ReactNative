@@ -1,10 +1,8 @@
-import React from "react-native";
+import React from "react";
 import { Body, ButtonMenu, HeaderText, ButtonBasket } from "./styles";
 import { Entypo } from "@expo/vector-icons";
-import { useAuth } from "../../contexts/authContext";
 
 const Header = ({ navigation }: { navigation: any }) => {
-  const { id } = useAuth();
   return (
     <Body>
       <ButtonMenu>

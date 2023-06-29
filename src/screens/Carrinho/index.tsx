@@ -22,12 +22,15 @@ import {
 } from "./styles";
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { useCart } from "../../contexts/cartContext";
 
 const Carrinho = ({ navigation }) => {
+  const { cart, setCart } = useCart();
+  
   const handleDiminuir = (id: number) => {
     setProdutos((prevProdutos) => {
       return prevProdutos.map((produto) => {
-        if (produto.id === id) {
+        if (produto.produtoId === id) {
           return {
             ...produto,
             quantidade: produto.quantidade - 1,
@@ -40,7 +43,7 @@ const Carrinho = ({ navigation }) => {
   const handleAumentar = (id: number) => {
     setProdutos((prevProdutos) => {
       return prevProdutos.map((produto) => {
-        if (produto.id === id) {
+        if (produto.produtoId === id) {
           return {
             ...produto,
             quantidade: produto.quantidade + 1,
@@ -52,65 +55,25 @@ const Carrinho = ({ navigation }) => {
   };
 
   const handleRemover = (id: number) => {
-    setProdutos((prevProdutos) => {
-      return prevProdutos.filter((produto) => produto.id !== id);
-    });
+    console.log(id)
+    setCart(produtos.filter((produto) => produto.produtoId !== id));
   };
 
-  let nome: string;
-  let preco: Double;
   let total: number = 0;
 
-  const [produtos, setProdutos] = useState([
-    {
-      id: 1,
-      image:
-        "https://raw.githubusercontent.com/jameshmaclean/Grupo1ReactNative/main/src/assets/images/pilao.png?token=GHSAT0AAAAAAB7VNHM725O22SC77J3DRKMOZEUIJDA",
-      nome: "Café Pilão",
-      preco: 40.0,
-      quantidade: 0,
-    },
-    {
-      id: 2,
-      image:
-        "https://raw.githubusercontent.com/jameshmaclean/Grupo1ReactNative/main/src/assets/images/pilao.png?token=GHSAT0AAAAAAB7VNHM725O22SC77J3DRKMOZEUIJDA",
-      nome: "Café Pelé",
-      preco: 50.0,
-      quantidade: 0,
-    },
-    {
-      id: 3,
-      image:
-        "https://raw.githubusercontent.com/jameshmaclean/Grupo1ReactNative/main/src/assets/images/pilao.png?token=GHSAT0AAAAAAB7VNHM725O22SC77J3DRKMOZEUIJDA",
-      nome: "Café Pelé",
-      preco: 10.0,
-      quantidade: 0,
-    },
-    {
-      id: 4,
-      image:
-        "https://raw.githubusercontent.com/jameshmaclean/Grupo1ReactNative/main/src/assets/images/pilao.png?token=GHSAT0AAAAAAB7VNHM725O22SC77J3DRKMOZEUIJDA",
-      nome: "Café Pelé",
-      preco: 10.0,
-      quantidade: 0,
-    },
-    {
-      id: 5,
-      image:
-        "https://raw.githubusercontent.com/jameshmaclean/Grupo1ReactNative/main/src/assets/images/pilao.png?token=GHSAT0AAAAAAB7VNHM725O22SC77J3DRKMOZEUIJDA",
-      nome: "Café Pelé",
-      preco: 10.0,
-      quantidade: 0,
-    },
-    {
-      id: 6,
-      image:
-        "https://raw.githubusercontent.com/jameshmaclean/Grupo1ReactNative/main/src/assets/images/pilao.png?token=GHSAT0AAAAAAB7VNHM725O22SC77J3DRKMOZEUIJDA",
-      nome: "Café Pelé",
-      preco: 10.0,
-      quantidade: 0,
-    },
-  ]);
+  const [produtos, setProdutos] = useState([{}]);
+  
+let quantidadeTotal = 0;
+let valorTotal = 0;
+
+produtos.forEach((produto) => {
+  quantidadeTotal += produto.quantidade;
+  valorTotal += produto.quantidade * produto.valorUnitario;
+});
+
+  React.useEffect(() => {
+    setProdutos(cart);
+  }, [cart]);
 
   return (
     <ContainerCarrinho>
@@ -126,18 +89,17 @@ const Carrinho = ({ navigation }) => {
         contentContainerStyle={{ alignItems: "center" }}
         style={{ width: "100%", height: "75%" }}
       >
-        {produtos.map((item) => {
-          total += item.quantidade * item.preco;
+        {produtos.map((item: any) => {
+          total += item.quantidade * item.valorUnitario;
           return (
-            <CardCarrinho key={item.id}>
+            <CardCarrinho key={item.produtoId}>
               <ImagemCarrinho
-                key={item.id}
-                source={{ uri: item.image }}
+                source={{ uri: item.url }}
                 resizeMode="contain"
               />
-              <CardText>
+              <CardText >
                 <CartTitle>{item.nome}</CartTitle>
-                <CartQt>
+                <CartQt >
                   Quantidade:{" "}
                   <CartNum>
                     <Feather
@@ -145,23 +107,24 @@ const Carrinho = ({ navigation }) => {
                       size={13}
                       color="black"
                       style={{ textAlignVertical: "center" }}
-                      onPress={() => handleAumentar(item.id)}
+                      onPress={() => handleAumentar(item.produtoId)}
                     />
                     {item.quantidade}
                     <Feather
                       name="minus"
                       size={13}
                       color="black"
-                      onPress={() => handleDiminuir(item.id)}
+                      onPress={() => handleDiminuir(item.produtoId)}
                       disabled={item.quantidade <= 0 ? true : false}
                     />
                   </CartNum>
                 </CartQt>
                 <CartQt>
-                  Total: <CartNum>R$ {item.quantidade * item.preco}</CartNum>
+                  Total:{" "}
+                  <CartNum>R$ {item.quantidade * item.valorUnitario}</CartNum>
                 </CartQt>
 
-                <Remove onPress={() => handleRemover(item.id)}>
+                <Remove onPress={() => handleRemover(item.produtoId)}>
                   <RemoveText>Remover</RemoveText>
                 </Remove>
               </CardText>

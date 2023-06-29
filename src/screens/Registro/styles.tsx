@@ -5,7 +5,7 @@ export const Container = styled.View`
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 10px;
-  height: 800px;
+  height: 1200px;
   background-color: ${global.surface};
 `;
 

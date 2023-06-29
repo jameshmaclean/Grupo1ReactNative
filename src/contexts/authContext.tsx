@@ -3,7 +3,11 @@ import { api } from "../services/api";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { IUser } from "../Model/User";
-import { UserById } from "../services/usuario";
+import { UserById, UserPic } from "../services/usuario";
+import * as FileSystem from 'expo-file-system';
+
+
+
 
 interface IAuthState {
   accessToken: string;
@@ -19,16 +23,21 @@ interface IAuthContext {
   id: IUser;
   login(credential: ICredentials): void;
   logout(): void;
-  user:IUserData;
-  setUser(user:any):any
+  user: IUserData;
+  setUser(user: any): any;
+  perfil: string;
 }
 
 interface IProps {
   children: React.ReactElement;
 }
 
-interface IUserData {
+export interface IUserData {
   id: number;
+  telefone:string;
+  compra: boolean;
+  venda:boolean;
+  data: string;
   url: string;
   nome: string;
   email: string;
@@ -38,6 +47,8 @@ interface IUserData {
   uf: string;
   cidade: string;
   complemento: string;
+  user: any;
+  endereco: any;
 }
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -46,8 +57,9 @@ const userData = "@DevProfile: id";
 console.log(tokenData, userData);
 
 const AuthProvider: React.FC<IProps> = ({ children }) => {
-  const [user, setUser ] = React.useState<IUserData>({} as IUserData)
+  const [user, setUser] = React.useState<IUserData>({} as IUserData);
   const [data, setData] = React.useState<IAuthState>({} as IAuthState);
+  const [perfil, setPerfil] = React.useState("");
   React.useEffect(() => {
     async function loadAuthData() {
       const accessToken = await AsyncStorage.getItem(tokenData);
@@ -60,6 +72,7 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
     }
     loadAuthData();
   }, []);
+
   const login = async ({ username, password }: ICredentials) => {
     try {
       const response = await api.post("/auth/signin", { username, password });
@@ -81,12 +94,15 @@ const AuthProvider: React.FC<IProps> = ({ children }) => {
     await AsyncStorage.removeItem(userData);
     setData({} as IAuthState);
   };
-  const getUser = async(id:number)=>{
+
+  const getUser = async (id: number) => {
     const response = await UserById(id);
-    setUser(response.data);
-  }
+    console.log(response.data);
+  };
   return (
-    <AuthContext.Provider value={{ setUser, user, id: data.id, login, logout }}>
+    <AuthContext.Provider
+      value={{ perfil, setUser, user, id: data.id, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

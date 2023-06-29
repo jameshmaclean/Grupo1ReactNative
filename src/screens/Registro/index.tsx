@@ -1,7 +1,14 @@
-import React from 'react'
-import { ScrollView, View } from 'react-native';
+import React, {useState} from 'react'
+import { ScrollView, View, Image, Button } from 'react-native';
 import {Container, Title, FormGroup, Input, ButtonText, Button1} from './styles'
+<<<<<<< HEAD
 import { Preechimento } from './styles';
+=======
+import axios from 'axios';
+import { api } from '../../services/api';
+import * as ImagePicker from 'expo-image-picker';
+import FormData from 'form-data';
+>>>>>>> f34a6402cafd7f716161120d095aa1b80cab2f8b
 
 const Registro = () => {
 
@@ -15,30 +22,97 @@ const Registro = () => {
     venda : boolean
     data : string
     cep : string
+    estado: string
+    cidade: string
+    bairro: string
+    rua: string 
     numero : string
     complemento : string
     password : string
+    roles: [string]
+    url:string
 }
+
+
+const [fotoUser, setFotoUser] = useState('')
+
+const [user, setUser] = useState<userType>({
+  email: '',
+  nome: '',
+  nomeUser: '',
+  telefone: '24998399530',
+  cpf: '',
+  compra: false,
+  venda: false,
+  cep: '',
+  estado:'',
+  cidade:'',
+  bairro:'',
+  rua: '',
+  data: '2023-06-28',
+  numero: '',
+  complemento: '',
+  password: '',
+  roles: ['admin'],
+  url: ''
+});
+
+
+
+
+const openImagePicker = async () => {
+  const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+  if (permissionResult.granted === false) {
+    alert('A permissão para acessar a biblioteca de mídia é necessária!');
+    return;
+  }
+  const pickerResult = await ImagePicker.launchImageLibraryAsync();
+  if (!pickerResult.canceled) {
+    setFotoUser(pickerResult.assets[0].uri);
+  }
+};
+
+const handleRegistro = async() => {
+  const formData = new FormData();
+  formData.append('usuarioDTO', JSON.stringify(user))
+  formData.append('foto', {
+    uri: fotoUser, // URI da imagem selecionada
+    type: 'image/jpeg', // Tipo do arquivo de imagem
+    name: 'photo.jpg', // Nome do arquivo de imagem
+  });
+  ;
+  console.log("formdata:", formData)
+
+  const response = await api.post(`usuario/inserir?email=${encodeURIComponent(user.email)}`, formData, {headers:{'Content-Type': 'multipart/form-data'}} )
+    console.log("response",response)
+    return response
+};
 
   return (
     <ScrollView>
       <Container>
         <Title>Preencha os campos e clique em registrar:</Title>
 
+        {fotoUser && (
+        <Image source={{ uri: fotoUser }} style={{ width: 200, height: 200 }} />
+      )}
+      <Button title="Escolher foto" onPress={openImagePicker} />
+
         <FormGroup>
-          <Input placeholderTextColor="#705A54" placeholder="Nome" />
+          <Input placeholderTextColor="#705A54" placeholder="Nome" onChangeText={(text) => setUser({ ...user, nome: text })}/>
         </FormGroup>
 
         <FormGroup>
-          <Input placeholderTextColor="#705A54" placeholder="Usuário" />
+          <Input placeholderTextColor="#705A54" placeholder="Usuário"  onChangeText={(text) => setUser({ ...user, nomeUser: text })} />
         </FormGroup>
 
         <FormGroup>
-          <Input placeholderTextColor="#705A54" placeholder="E-mail" />
+          <Input placeholderTextColor="#705A54" placeholder="E-mail" onChangeText={(text) => setUser({ ...user, email: text })}/>
         </FormGroup>
 
         <FormGroup>
-          <Input placeholderTextColor="#705A54" secureTextEntry placeholder="Senha" />
+          <Input placeholderTextColor="#705A54" secureTextEntry placeholder="Senha" onChangeText={(text) => setUser({ ...user, password: text })}/>
         </FormGroup>
 
         <FormGroup>
@@ -46,32 +120,40 @@ const Registro = () => {
         </FormGroup>
 
         <FormGroup>
-          <Input placeholderTextColor="#705A54" placeholder="CPF" />
+          <Input placeholderTextColor="#705A54" placeholder="CPF"  onChangeText={(text) => setUser({ ...user, cpf: text })} />
         </FormGroup>
 
         <Title>Endereço:</Title>
 
         <FormGroup>
-          <Input placeholderTextColor="#705A54" placeholder="CEP" />
+          <Input placeholderTextColor="#705A54" placeholder="CEP" onChangeText={(text) => setUser({ ...user, cep: text })}/>
         </FormGroup>
 
         <FormGroup>
-          <Input placeholderTextColor="#705A54" placeholder="Estado" />
+          <Input placeholderTextColor="#705A54" placeholder="Estado" onChangeText={(text) => setUser({ ...user, estado: text })} />
         </FormGroup>
 
         <FormGroup>
-          <Input placeholderTextColor="#705A54" placeholder="Cidade" />
+          <Input placeholderTextColor="#705A54" placeholder="Cidade" onChangeText={(text) => setUser({ ...user, cidade: text })}/>
         </FormGroup>
 
         <FormGroup>
-          <Input placeholderTextColor="#705A54" placeholder="Bairro" />
+          <Input placeholderTextColor="#705A54" placeholder="Bairro" onChangeText={(text) => setUser({ ...user, bairro: text })}/>
         </FormGroup>
 
         <FormGroup>
-          <Input placeholderTextColor="#705A54" placeholder="Complemento" />
+          <Input placeholderTextColor="#705A54" placeholder="Rua" onChangeText={(text) => setUser({ ...user, rua: text })}/>
         </FormGroup>
 
-        <Button1 onPress={() => console.log('Registrar')}>
+        <FormGroup>
+          <Input placeholderTextColor="#705A54" placeholder="Numero" onChangeText={(text) => setUser({ ...user, numero: text })}/>
+        </FormGroup>
+
+        <FormGroup>
+          <Input placeholderTextColor="#705A54" placeholder="Complemento" onChangeText={(text) => setUser({ ...user, complemento: text })}/>
+        </FormGroup>
+
+        <Button1  onPress={()=> handleRegistro} >
           <ButtonText>Registrar</ButtonText>
         </Button1>
       </Container>
